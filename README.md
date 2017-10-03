@@ -1,6 +1,7 @@
 # MobileDev_Project
 Project of Mobile development 2017
-#Deadlines - Planner
+
+# Deadlines - Planner
 https://teamup.com/ksaezna9x6yir621mt 
 ## Mobile Development Idea's
 

@@ -1,6 +1,9 @@
 # MobileDev_Project
 Project of Mobile development 2017
 
+# Trello 
+https://trello.com/b/zWIqc2nj/mobile-development-app-hasseling  
+
 # Apis to get places
 https://developers.google.com/places/web-service/search  
 We kunnen deze api gebruiken dat op basis van verschillende criteria ons plaatsen geeft  

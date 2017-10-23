@@ -1,13 +1,10 @@
 package be.pxl.hasseling;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,44 +21,131 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btn_supermarket, btn_restaurant, btn_laundry;
+    Button btn_supermarket, btn_restaurant, btn_laundry,btn_drink,btn_transport,btn_club,btn_fitness,btn_todo;
+
+    //Niet wegdoen aub nasnas
+    //dit dient om via de mainpage naar alle categorieen te gaan in een aparte scherm
+    public void catogeries() {
+        btn_supermarket = (Button) findViewById(R.id.btn_supermarket);
+        btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
+        btn_laundry = (Button) findViewById(R.id.btn_laundry);
+        btn_drink = (Button) findViewById(R.id.btn_drink);
+        btn_transport = (Button) findViewById(R.id.btn_transport);
+        btn_club = (Button) findViewById(R.id.btn_club);
+        btn_fitness = (Button) findViewById(R.id.btn_fitness);
+        btn_todo = (Button) findViewById(R.id.btn_todo);
+
+      btn_supermarket.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent supermarket = new Intent(MainActivity.this, SupermarketActivity.class);
+                                                   startActivity(supermarket);
+                                               }
+                                           }
+        );
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent restaurant = new Intent(MainActivity.this, RestaurantActivity.class);
+                                                   startActivity(restaurant);
+                                               }
+                                           }
+        );
+
+        btn_laundry.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent laundry = new Intent(MainActivity.this, LaundryActivity.class);
+                                                   startActivity(laundry);
+                                               }
+                                           }
+        );
+
+        btn_drink.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent drink = new Intent(MainActivity.this, DrinkActivity.class);
+                                                   startActivity(drink);
+                                               }
+                                           }
+        );
+
+        btn_transport.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent transport = new Intent(MainActivity.this, TransportActivity.class);
+                                                   startActivity(transport);
+                                               }
+                                           }
+        );
+
+        btn_club.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent club = new Intent(MainActivity.this, ClubActivity.class);
+                                                   startActivity(club);
+                                               }
+                                           }
+        );
+        btn_fitness.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent fitness = new Intent(MainActivity.this, FitnessActivity.class);
+                                                   startActivity(fitness);
+                                               }
+                                           }
+        );
+
+        btn_todo.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent todo = new Intent(MainActivity.this, TodoActivity.class);
+                                                   startActivity(todo);
+                                               }
+                                           }
+        );
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        catogeries();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.content_frame, new ---())
-                    .commit();
-        }
+        //Als je deze Code in commentaar niet nodig heb doe ze weg.
+        //Beetje onoverzichtelijk :(
 
-
-        // Locate the button in activity_main.xml
-            btn_supermarket = (Button) findViewById(R.id.btn_supermarket);
-            btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
-            btn_laundry = (Button) findViewById(R.id.btn_laundry);
-
-            // Capture button clicks
-            btn_supermarket.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-                // Start NewActivity
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, new FirstFragment())
-                        .commit();
-            }
-
-        });
-*/
+//        setContentView(R.layout.activity_main);
+//        if (savedInstanceState == null) {
+//            FragmentManager fragmentManager = getFragmentManager();
+//            fragmentManager.beginTransaction()
+//                    .add(R.id.content_frame, new ---())
+//                    .commit();
+//        }
+//
+//
+//        // Locate the button in activity_main.xml
+//            btn_supermarket = (Button) findViewById(R.id.btn_supermarket);
+//            btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
+//            btn_laundry = (Button) findViewById(R.id.btn_laundry);
+//
+//            // Capture button clicks
+//            btn_supermarket.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View arg0) {
+//
+//                FragmentManager fragmentManager = getFragmentManager();
+//                // Start NewActivity
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.content_frame, new SupermarketFragment())
+//                        .commit();
+//            }
+//
+//        });
 
 
         //ViewPager view = (ViewPager) findViewById(R.id.drawer_layout);
@@ -91,7 +175,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
     }
 
@@ -128,6 +211,8 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Nasnas - dit doet niet wat het moet....
+    // het laat enkel de tekst in het midden van de scherm zien ipv aparte venster zoals mainpage
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -135,18 +220,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager fragmentManager = getFragmentManager();
 
-        if (id == R.id.nav_first_layout) {
+        if (id == R.id.nav_supermarket_layout) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new FirstFragment())
+                    .replace(R.id.content_frame, new SupermarketFragment())
                     .commit();
-        } else if (id == R.id.nav_second_layout) {
+        } else if (id == R.id.nav_restaurant_layout) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new SecondFragment())
+                    .replace(R.id.content_frame, new RestaurantFragment())
                     .commit();
 
-        } else if (id == R.id.nav_third_layout) {
+        } else if (id == R.id.nav_laundry_layout) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new ThirdFragment())
+                    .replace(R.id.content_frame, new LaundryFragment())
                     .commit();
 
         } else if (id == R.id.nav_share) {
@@ -154,7 +239,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -164,7 +248,7 @@ public class MainActivity extends AppCompatActivity
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.first_layout,
+        View view = inflater.inflate(R.layout.restaurant_layout,
                 container, false);
         Button button = (Button) view.findViewById(R.id.btn_supermarket);
         button.setOnClickListener(new View.OnClickListener()
@@ -175,7 +259,7 @@ public class MainActivity extends AppCompatActivity
                 // do something
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, new FirstFragment())
+                        .replace(R.id.content_frame, new SupermarketFragment())
                         .commit();
             }
         });

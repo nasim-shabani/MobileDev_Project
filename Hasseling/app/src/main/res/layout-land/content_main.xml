@@ -44,10 +44,12 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:width="180dp"
+                    android:width="320dp"
                     android:drawableLeft="@drawable/ic_supermarket"
+                    android:filterTouchesWhenObscured="false"
+                    android:gravity="left|center_vertical"
                     android:text="Supermarket"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
@@ -55,13 +57,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:width="180dp"
+                    android:width="320dp"
                     android:drawableLeft="@drawable/ic_restaurant"
                     android:gravity="left|center_vertical"
                     android:text="Restaurant"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -74,25 +75,26 @@
 
                 <Button
                     android:id="@+id/btn_laundry"
-                    android:layout_width="180dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="false"
                     android:layout_alignParentStart="false"
                     android:layout_alignParentTop="false"
                     android:drawableLeft="@drawable/ic_laundry"
                     android:text="@string/laundry"
-                    android:textSize="12sp"
+                    android:gravity="left|center_vertical"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/btn_drink"
-                    android:layout_width="180dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:drawableLeft="@drawable/ic_drink"
-                    android:gravity="center_vertical|center"
+                    android:gravity="left|center_vertical|center"
                     android:text="@string/drink"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded" />
             </RelativeLayout>
 
@@ -106,22 +108,23 @@
 
                 <Button
                     android:id="@+id/btn_transport"
-                    android:layout_width="180dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_transport"
                     android:text="Transport"
-                    android:textSize="12sp"
+                    android:gravity="left|center_vertical"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/btn_club"
-                    android:layout_width="180dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:drawableLeft="@drawable/ic_club"
+                    android:gravity="left|center_vertical|center"
                     android:text="Club"
-                    android:gravity="center_vertical|center"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded" />
             </RelativeLayout>
 
@@ -135,22 +138,23 @@
 
                 <Button
                     android:id="@+id/btn_fitness"
-                    android:layout_width="180dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_fitness"
                     android:text="Fitness"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
+                    android:gravity="left|center_vertical"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/btn_todo"
-                    android:layout_width="180dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:drawableLeft="@drawable/ic_todo"
+                    android:gravity="left|center_vertical|center"
                     android:text="To Do"
-                    android:gravity="center_vertical|center"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded" />
             </RelativeLayout>
 

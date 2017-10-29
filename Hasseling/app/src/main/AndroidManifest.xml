@@ -26,7 +26,8 @@
         <activity android:name=".TransportActivity" />
         <activity android:name=".ClubActivity" />
         <activity android:name=".FitnessActivity" />
-        <activity android:name=".TodoActivity"></activity>
+        <activity android:name=".TodoActivity" />
+        <activity android:name=".BaseActivity" />
     </application>
 
 </manifest>

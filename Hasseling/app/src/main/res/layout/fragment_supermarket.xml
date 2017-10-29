@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.pxl.hasseling.SupermarketActivityFragment"
+    tools:showIn="@layout/activity_supermarket">
+
+    <TextView
+        android:id="@+id/laundryView1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Supermarkt FRAGMENT!!! "
+        android:visibility="visible" />
+    <ListView
+        android:id="@+id/listview_supermarket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hello World!" />
+
+</FrameLayout>
+

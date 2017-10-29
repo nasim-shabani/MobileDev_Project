@@ -2,7 +2,8 @@ package be.pxl.hasseling;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ public class SupermarketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supermarket);
 
+/*
         TextView textView = (TextView) findViewById(
                 R.id.list_item_supermarket_textview);
         textView.setText("blub SupermarketActivity blub");
@@ -39,11 +41,35 @@ public class SupermarketActivity extends AppCompatActivity {
         // array as a third parameter.
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this, // context of the activity
-                R.layout.simplerow_listview,// type of list view
+                R.layout.list_item_categorie,// type of list view
                 supermarkets//array as a third parameter
         );
 
         listView.setAdapter(arrayAdapter);
+*/
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

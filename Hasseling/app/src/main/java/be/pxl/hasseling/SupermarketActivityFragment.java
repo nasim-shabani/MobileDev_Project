@@ -53,4 +53,7 @@ public class SupermarketActivityFragment extends Fragment {
        // return inflater.inflate(R.layout.fragment_supermarket, container, false);
         return rootview;
     }
+
+
+
 }

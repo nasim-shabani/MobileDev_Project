@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,19 +71,8 @@ public class SupermarketActivityFragment extends Fragment {
     public class FetchSupermarketTask extends AsyncTask<String, Void, List<String>> {
         private final String LOG_TAG = FetchSupermarketTask.class.getSimpleName();
 
-        /* The date/time conversion code is going to be moved outside the asynctask later,
-         * so for convenience we're breaking it out into its own method now.
-         */
-        private String getReadableDateString(long time){
-            // Because the API returns a unix timestamp (measured in seconds),
-            // it must be converted to milliseconds in order to be converted to valid date.
-            SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
-            return shortenedDateFormat.format(time);
-        }
-
-
         /**
-         * Take the String representing the complete forecast in JSON Format and
+         * Take the String representing the complete supermarkets in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
          *
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
@@ -96,6 +83,7 @@ public class SupermarketActivityFragment extends Fragment {
 
             // These are the names of the JSON objects that need to be extracted.
             final String OWM_RESULTS = "results";
+
             final String OWN_OPENINGHOURS = "opening_hours";
             final String OWN_OPENNOW = "open_now";
 
@@ -104,54 +92,37 @@ public class SupermarketActivityFragment extends Fragment {
             final String OWM_VICINITY = "vicinity";
 
             JSONObject supermarketJson = new JSONObject(supermarketJsonStr);
-            JSONArray supermarketsrArray = supermarketJson.getJSONArray(OWM_RESULTS);//result
-
-            Time dayTime = new Time();
-            dayTime.setToNow();
-            // we start at the day returned by local time. Otherwise this is a mess.
-            int julianStartDay = Time.getJulianDay(System.currentTimeMillis(), dayTime.gmtoff);
-            // now we work exclusively in UTC
-            dayTime = new Time();
+            JSONArray supermarketsrArray = supermarketJson.getJSONArray(OWM_RESULTS);
 
             List<String> resultStrs = new ArrayList<>();
             for(int i = 0; i < supermarketsrArray.length(); i++) {
-                // For now, using the format "Name, Adres, openNow, Rating"
-                String day;
                 String name;
                 String openNow;
                 String rating;
                 String vicinity;
 
-                // Get the JSON object representing the day
+                // Get the JSON object representing the  supermarket
                 JSONObject supermarket = supermarketsrArray.getJSONObject(i);
-
-                // The date/time is returned as a long.  We need to convert that
-                // into something human-readable, since most people won't read "1400356800" as
-                // "this saturday".
-                long dateTime;
-                // Cheating to convert this to UTC time, which is what we want anyhow
-                dateTime = dayTime.setJulianDay(julianStartDay+i);
-                day = getReadableDateString(dateTime);
 
                 name = supermarket.getString(OWM_NAME);
                 vicinity= supermarket.getString(OWM_VICINITY);
+
                 if (supermarket.has(OWM_RATING)) {
-                    rating = Math.round(supermarket.getLong(OWM_RATING)) + " sterren";
+                    rating = Math.round(supermarket.getLong(OWM_RATING)) + " stars";
                 }else{
-                    rating = "Geen rating";
+                    rating = "No rating";
                 }
-                // description is in a child array called "weather", which is 1 element long.
+
                 if (supermarket.has(OWN_OPENINGHOURS)) {
                     JSONObject openingHoursObject = supermarket.getJSONObject(OWN_OPENINGHOURS);
                     boolean openNowBool = openingHoursObject.getBoolean(OWN_OPENNOW);
-                    openNow = ((openNowBool == true) ? "OPEN!" : "GESLOTEN");
+                    openNow = ((openNowBool == true) ? "OPEN NOW!" : "CLOSED ATM");
                 }else{
-                    openNow = "Niet gekend";
+                    openNow = "Unknown";
                 }
-                resultStrs.add("NAAM =" + name  + "ADRES =" + vicinity +"RATING =" + rating + "NU open =" +  openNow);
+                resultStrs.add(name  + "\t - " + rating + "\n"  +  openNow + "\n" + vicinity);
             }
-
-          /*  for (String s : resultStrs) {
+          /*  for (String s : resultStrs) { //for testing porpuse
                Log.v(LOG_TAG, "Supermarket entry: " + s);
             }*/
             return resultStrs;
@@ -165,8 +136,6 @@ public class SupermarketActivityFragment extends Fragment {
                 return null;
             }
 
-            // These two need to be declared outside the try/catch
-                // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
@@ -178,9 +147,9 @@ public class SupermarketActivityFragment extends Fragment {
             String keyword = "convenience_store";
 
             try {
-                // Construct the URL for the OpenWeatherMap query
-                // Possible parameters are available at OWM's forecast API page, at
-                // http://openweathermap.org/API#forecast
+                // Construct the URL for the Google places API query
+                // Possible parameters are available at API page, at
+                // https://developers.google.com/places/web-service/search
                 final String SUPERMARKET_BASE_URL =
                         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
                 final String LOCATION_PARAM = "location";
@@ -198,11 +167,7 @@ public class SupermarketActivityFragment extends Fragment {
 
                    //   Log.v(LOG_TAG, "Built URI " + builtUri.toString());
                  //  Log.v(LOG_TAG, "Forecast string: " + supermarketsJsonStr);
-
-                // URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
-          /*      String baseUrl = "http://api.openweathermap.org/data/2.5/forecast?q=94043&mode=json&units=metric&cnt=7";
-                String apiKey = "&APPID=" + BuildConfig.OPEN_WEATHER_MAP_API_KEY;
-                URL url = new URL(baseUrl.concat(apiKey));*/
+                //Debugging purpose
 
                 // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -233,11 +198,11 @@ public class SupermarketActivityFragment extends Fragment {
                     return null;
                 }
                 supermarketsJsonStr = buffer.toString();
-             //   Log.v(LOG_TAG, "Supermarket JSON String " + supermarketsJsonStr);
+             //   Log.v(LOG_TAG, "Supermarket JSON String " + supermarketsJsonStr); //Debugging purpose
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
-                // If the code didn't successfully get the weather data, there's no point in attempting
+                // If the code didn't successfully get the supermarket data, there's no point in attempting
                 // to parse it.
                 supermarketsJsonStr = null;
                 return null;
@@ -261,7 +226,7 @@ public class SupermarketActivityFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            // This will only happen if there was an error getting or parsing the forecast.
+            // This will only happen if there was an error getting or parsing the supermarket.
             return null;
         }
 

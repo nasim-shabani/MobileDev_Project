@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.pxl.hasseling">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -28,6 +29,15 @@
         <activity android:name=".FitnessActivity" />
         <activity android:name=".TodoActivity" />
         <activity android:name=".BaseActivity" />
+        <activity
+            android:name=".SupermarketDetailsActivity"
+            android:label="@string/title_activity_supermarket_details"
+            android:parentActivityName=".SupermarketActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="be.pxl.hasseling.SupermarketActivity" />
+        </activity>
     </application>
 
 </manifest>

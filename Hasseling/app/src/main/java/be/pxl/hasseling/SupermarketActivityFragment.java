@@ -1,5 +1,6 @@
 package be.pxl.hasseling;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -62,6 +64,17 @@ public class SupermarketActivityFragment extends Fragment {
         ListView listView = (ListView) rootview.findViewById(
                 R.id.listview_supermarket);
         listView.setAdapter(supermarketsAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String forecast = supermarketsAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), SupermarketDetailsActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, forecast);
+                startActivity(intent);
+            }
+        });
 
         FetchSupermarketTask supermarketTask = new FetchSupermarketTask();
         supermarketTask.execute("50.931348,5.343312");

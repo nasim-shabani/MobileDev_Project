@@ -6,12 +6,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -86,6 +90,37 @@ public class SupermarketFragment extends Fragment {
 
         SupermarketFragment.FetchSupermarketTask supermarketTask = new SupermarketFragment.FetchSupermarketTask();
         supermarketTask.execute("50.931348,5.343312");
+
+
+        //ADDED BY NASIM - To pass a string between fragments -
+        // miss kan die je helpen om de details te kunnen tonen,
+        // Van de SupermarketFragment naar  de SupermarketDetailsFragment,
+        final EditText sampleTxt;
+        Button  submitBtn;
+
+        sampleTxt = (EditText) rootview.findViewById(R.id.SampleTxt);
+        submitBtn = (Button) rootview.findViewById(R.id.SubmitBtn);
+
+        submitBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String txt = sampleTxt.getText().toString();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("SampleTxt", txt);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                SupermarketDetailsFragment supermarketDetailsFragment = new SupermarketDetailsFragment();
+                supermarketDetailsFragment.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.content_frame, supermarketDetailsFragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+
         return rootview;
     }
 

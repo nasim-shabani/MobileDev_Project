@@ -1,33 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.pxl.hasseling.SupermarketActivityFragment"
-    tools:showIn="@layout/activity_supermarket"
-    android:baselineAligned="false"
-    android:orientation="vertical"
-    android:weightSum="1">
+    tools:context="be.pxl.hasseling.Fragment.SupermarketFragment">
 
-    <TextView
-        android:id="@+id/laundryView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Some supermarkets close to Dusart."
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="visible" />
+        <TextView
+            android:id="@+id/laundryView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/SupermarketTitle"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
 
-    <ListView
-        android:id="@+id/listview_supermarket"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:headerDividersEnabled="false"
-        android:scrollbars="horizontal"
-        android:text="Hello World!" />
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/listview_supermarket"
+            android:headerDividersEnabled="false"
+            android:scrollbars="horizontal"
+            android:text="Hello World!"
+            android:layout_height="553dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"/>
 
+</FrameLayout>

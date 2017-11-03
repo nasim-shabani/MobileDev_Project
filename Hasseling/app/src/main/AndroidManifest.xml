@@ -11,32 +11,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantActivity" />
-        <activity android:name=".SupermarketActivity" />
-        <activity android:name=".LaundryActivity" />
-        <activity android:name=".DrinkActivity" />
-        <activity android:name=".TransportActivity" />
-        <activity android:name=".ClubActivity" />
-        <activity android:name=".FitnessActivity" />
-        <activity android:name=".TodoActivity" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".activity.RestaurantActivity" />
+        <activity android:name=".activity.SupermarketActivity" />
+        <activity android:name=".activity.LaundryActivity" />
+        <activity android:name=".activity.DrinkActivity" />
+        <activity android:name=".activity.TransportActivity" />
+        <activity android:name=".activity.ClubActivity" />
+        <activity android:name=".activity.FitnessActivity" />
+        <activity android:name=".activity.TodoActivity" />
         <activity
-            android:name=".SupermarketDetailsActivity"
-            android:label="@string/title_activity_supermarket_details"
-            android:parentActivityName=".SupermarketActivity"
+            android:name=".activity.SupermarketDetailsActivity"
+            android:parentActivityName=".activity.SupermarketActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.pxl.hasseling.SupermarketActivity" />
+                android:value="be.pxl.hasseling.activity.SupermarketActivity" />
         </activity>
     </application>
 

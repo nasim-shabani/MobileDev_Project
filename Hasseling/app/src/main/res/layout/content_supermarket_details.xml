@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="be.pxl.hasseling.SupermarketDetailsActivity"
+    tools:context="be.pxl.hasseling.activity.SupermarketDetailsActivity"
     tools:showIn="@layout/activity_supermarket_details">
 
 

@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_home">
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*">
+
+        <!--android:background="@color/colorBg"-->
+
+        <!-- Column Header -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_span="2"
+                app:srcCompat="@drawable/header_hasseling" />
+
+        </TableRow>
+
+        <!-- Column One -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_supermarket"
+                android:drawableLeft="@mipmap/ic_supermarket"
+                android:theme="@style/AppTheme.Button"
+                android:text="Supermarket"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_restaurant"
+                android:drawableLeft="@mipmap/ic_restaurant"
+                android:theme="@style/AppTheme.Button"
+                android:text="Restaurant"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <!-- Column Two -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_laundry"
+                android:drawableLeft="@mipmap/ic_laundry"
+                android:theme="@style/AppTheme.Button"
+                android:text="Laundry"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_drink"
+                android:drawableLeft="@mipmap/ic_drink"
+                android:theme="@style/AppTheme.Button"
+                android:text="Drink"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <!-- Column Three -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_transport"
+                android:drawableLeft="@mipmap/ic_transport"
+                android:theme="@style/AppTheme.Button"
+                android:text="Transport"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_club"
+                android:drawableLeft="@mipmap/ic_club"
+                android:theme="@style/AppTheme.Button"
+                android:text="Club"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+
+        <!-- Column Four -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_fitness"
+                android:drawableLeft="@mipmap/ic_fitness"
+                android:theme="@style/AppTheme.Button"
+                android:text="Fitness"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_todo"
+                android:drawableLeft="@mipmap/ic_todo"
+                android:theme="@style/AppTheme.Button"
+                android:text="To Do"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+    </TableLayout>
+</FrameLayout>

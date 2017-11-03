@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/containerSupermarkets"
-    tools:context="be.pxl.hasseling.SupermarketActivity">
+    tools:context="be.pxl.hasseling.activity.SupermarketActivity">
 
 <!--    <TextView
         android:id="@+id/list_item_supermarket_textview"

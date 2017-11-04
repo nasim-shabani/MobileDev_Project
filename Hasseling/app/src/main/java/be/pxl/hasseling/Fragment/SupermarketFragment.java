@@ -125,7 +125,7 @@ public class SupermarketFragment extends Fragment {
     }
 
     public class FetchSupermarketTask extends AsyncTask<String, Void, List<String>> {
-        private final String LOG_TAG = SupermarketActivityFragment.FetchSupermarketTask.class.getSimpleName();
+        private final String LOG_TAG = SupermarketFragment.FetchSupermarketTask.class.getSimpleName();
 
         /**
          * Take the String representing the complete supermarkets in JSON Format and

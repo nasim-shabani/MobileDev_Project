@@ -15,6 +15,7 @@ import be.pxl.hasseling.R;
  */
 public class SupermarketDetailsFragment extends Fragment {
 
+    private String supermarketStr;
 
     public SupermarketDetailsFragment() {
         // Required empty public constructor
@@ -24,15 +25,20 @@ public class SupermarketDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View roorView = inflater.inflate(R.layout.fragment_supermarket_details, container, false);
-
+        View rootView = inflater.inflate(R.layout.fragment_supermarket_details, container, false);
+   /*     Intent intent = getActivity().getIntent();
+        if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
+            supermarketStr = intent.getStringExtra(Intent.EXTRA_TEXT);
+            ((TextView) rootView.findViewById(R.id.supermarketdetail_text))
+                    .setText(supermarketStr);
+        }*/
         //ADDED bY NASIM
         Bundle bundle = getArguments();
-        String txt = bundle.getString("SampleTxt");
-        TextView sampleText = (TextView) roorView.findViewById(R.id.SampleTxt);
+        String txt = bundle.getString("supermarketdetail_text");
+        TextView sampleText = (TextView) rootView.findViewById(R.id.supermarketdetail_text);
         sampleText.setText(txt);
 
-        return roorView;
+        return rootView;
     }
 
 }

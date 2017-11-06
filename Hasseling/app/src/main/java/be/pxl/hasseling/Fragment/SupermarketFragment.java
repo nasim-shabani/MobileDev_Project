@@ -1,7 +1,6 @@
 package be.pxl.hasseling.Fragment;
 
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -34,7 +31,6 @@ import java.util.List;
 
 import be.pxl.hasseling.BuildConfig;
 import be.pxl.hasseling.R;
-import be.pxl.hasseling.activity.SupermarketDetailsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,9 +78,19 @@ public class SupermarketFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String forecast = supermarketsAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), SupermarketDetailsActivity.class)
+                /*Intent intent = new Intent(getActivity(), SupermarketDetailsActivity.class)
                         .putExtra(Intent.EXTRA_TEXT, forecast);
-                startActivity(intent);
+                startActivity(intent);*/
+                Bundle bundle = new Bundle();
+                bundle.putString("supermarketdetail_text", forecast);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                SupermarketDetailsFragment supermarketDetailsFragment = new SupermarketDetailsFragment();
+                supermarketDetailsFragment.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.content_frame, supermarketDetailsFragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -95,7 +101,8 @@ public class SupermarketFragment extends Fragment {
         //ADDED BY NASIM - To pass a string between fragments -
         // miss kan die je helpen om de details te kunnen tonen,
         // Van de SupermarketFragment naar  de SupermarketDetailsFragment,
-        final EditText sampleTxt;
+        //thankyouuuuuuuuuuuuuuu ~ dani
+/*        final EditText sampleTxt;
         Button  submitBtn;
 
         sampleTxt = (EditText) rootview.findViewById(R.id.SampleTxt);
@@ -118,7 +125,7 @@ public class SupermarketFragment extends Fragment {
                 fragmentTransaction.replace(R.id.content_frame, supermarketDetailsFragment);
                 fragmentTransaction.commit();
             }
-        });
+        });*/
 
 
         return rootview;

@@ -24,7 +24,6 @@
         <activity android:name=".activity.SupermarketActivity" />
         <activity android:name=".activity.LaundryActivity" />
         <activity android:name=".activity.DrinkActivity" />
-        <activity android:name=".activity.TransportActivity" />
         <activity android:name=".activity.ClubActivity" />
         <activity android:name=".activity.FitnessActivity" />
         <activity android:name=".activity.TodoActivity" />

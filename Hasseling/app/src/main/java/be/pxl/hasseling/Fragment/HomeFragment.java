@@ -55,7 +55,8 @@ public class HomeFragment extends Fragment{
 
 
 
-    Button btn_supermarket, btn_restaurant;
+    Button btn_supermarket, btn_restaurant, btn_laundry, btn_drink,
+            btn_transport, btn_club, btn_fitness, btn_todo;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -69,33 +70,36 @@ public class HomeFragment extends Fragment{
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
         btn_supermarket= (Button) view.findViewById(R.id.btn_supermarket);
-        btn_supermarket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment= new SupermarketFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                transaction.replace(R.id.content_frame, fragment);
-                transaction.commitAllowingStateLoss();
-            }
-        });
+        Fragment supermarketFragment= new SupermarketFragment();
+        setOnClickButtons(btn_supermarket, supermarketFragment);
 
-        /*
         btn_restaurant= (Button) view.findViewById(R.id.btn_restaurant);
-        btn_restaurant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment= new RestaurantFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                transaction.replace(R.id.content_frame, fragment);
-                transaction.commitAllowingStateLoss();
-            }
-        });
-        */
+        Fragment restaurantFragment= new RestaurantFragment();
+        setOnClickButtons(btn_restaurant, restaurantFragment);
 
+        btn_laundry= (Button) view.findViewById(R.id.btn_laundry);
+        Fragment laundryFragment= new LaundryFragment();
+        setOnClickButtons(btn_laundry, laundryFragment);
+
+        btn_drink= (Button) view.findViewById(R.id.btn_drink);
+        Fragment drinkFragment= new DrinkFragment();
+        setOnClickButtons(btn_drink, drinkFragment);
+
+        btn_transport= (Button) view.findViewById(R.id.btn_transport);
+        Fragment transportFragment= new TransportFragment();
+        setOnClickButtons(btn_transport, transportFragment);
+
+        btn_club= (Button) view.findViewById(R.id.btn_club);
+        Fragment clubFragment= new ClubFragment();
+        setOnClickButtons(btn_club, clubFragment);
+
+        btn_fitness= (Button) view.findViewById(R.id.btn_fitness);
+        Fragment fitnessFragment= new FitnessFragment();
+        setOnClickButtons(btn_fitness, fitnessFragment);
+
+        btn_todo= (Button) view.findViewById(R.id.btn_todo);
+        Fragment todoFragment= new TodoFragment();
+        setOnClickButtons(btn_todo, todoFragment);
 
         txtV_data = (TextView) view.findViewById(R.id.fetcheddata);
         imgV_weatherIcon = (ImageView) view.findViewById(R.id.img_weather);
@@ -106,6 +110,20 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
+    public void setOnClickButtons(Button btn, final Fragment fragment){
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Fragment fr= new fragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                transaction.replace(R.id.content_frame, fragment);
+                transaction.commitAllowingStateLoss();
+            }
+        });
+    }
 
     public class fetchData extends AsyncTask<Void, Void, Void>{
 

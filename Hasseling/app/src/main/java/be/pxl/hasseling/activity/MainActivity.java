@@ -10,8 +10,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import be.pxl.hasseling.Fragment.ClubFragment;
+import be.pxl.hasseling.Fragment.DrinkFragment;
+import be.pxl.hasseling.Fragment.FitnessFragment;
 import be.pxl.hasseling.Fragment.HomeFragment;
+import be.pxl.hasseling.Fragment.LaundryFragment;
+import be.pxl.hasseling.Fragment.RestaurantFragment;
 import be.pxl.hasseling.Fragment.SupermarketFragment;
+import be.pxl.hasseling.Fragment.TodoFragment;
+import be.pxl.hasseling.Fragment.TransportFragment;
 import be.pxl.hasseling.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +33,15 @@ public class MainActivity extends AppCompatActivity {
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_SUPERMARKET = "supermarket";
     public static String CURRENT_TAG = TAG_HOME;
+    private static final String TAG_SUPERMARKET = "supermarket";
+    private static final String TAG_RESTAURANT = "restaurant";
+    private static final String TAG_LAUNDRY = "laundry";
+    private static final String TAG_DRINK = "drink";
+    private static final String TAG_TRANSPORT = "transport";
+    private static final String TAG_CLUB = "club";
+    private static final String TAG_FITNESS = "fitness";
+    private static final String TAG_TODO = "todo";
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
@@ -79,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 // supermarket
                 SupermarketFragment supermarketFragment = new SupermarketFragment();
                 return supermarketFragment;
-            /*case 2:
+            case 2:
                 // restaurant fragment
                 RestaurantFragment restaurantFragment = new RestaurantFragment();
                 return restaurantFragment;
@@ -87,9 +101,27 @@ public class MainActivity extends AppCompatActivity {
                 // laundry fragment
                 LaundryFragment laundryFragment = new LaundryFragment();
                 return laundryFragment;
-            . . .
+            case 4:
+                // drink fragment
+                DrinkFragment drinkFragment = new DrinkFragment();
+                return drinkFragment;
+            case 5:
+                // transport fragment
+                TransportFragment transportFragment = new TransportFragment();
+                return transportFragment;
+            case 6:
+                // club fragment
+                ClubFragment clubFragment = new ClubFragment();
+                return clubFragment;
+             case 7:
+                // fitness fragment
+                FitnessFragment fitnessFragment = new FitnessFragment();
+                return fitnessFragment;
+             case 8:
+                // to do fragment
+                TodoFragment todoFragment = new TodoFragment();
+                return todoFragment;
 
-            */
             default:
                 return new HomeFragment();
         }
@@ -185,7 +217,41 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_SUPERMARKET;
                         nDrawerLayout.closeDrawers();
-
+                        break;
+                    case R.id.nav_restaurant:
+                        navItemIndex = 2;
+                        CURRENT_TAG = TAG_RESTAURANT;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_laundry:
+                        navItemIndex = 3;
+                        CURRENT_TAG = TAG_LAUNDRY;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_drink:
+                        navItemIndex = 4;
+                        CURRENT_TAG = TAG_DRINK;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_transport:
+                        navItemIndex = 5;
+                        CURRENT_TAG = TAG_TRANSPORT;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_club:
+                        navItemIndex = 6;
+                        CURRENT_TAG = TAG_CLUB;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_fitness:
+                        navItemIndex = 7;
+                        CURRENT_TAG = TAG_FITNESS;
+                        nDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_todo:
+                        navItemIndex = 8;
+                        CURRENT_TAG = TAG_TODO;
+                        nDrawerLayout.closeDrawers();
                         break;
                     /*case R.id.nav_restaurant:
                         navItemIndex = 1;

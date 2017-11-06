@@ -21,6 +21,8 @@ android {
     }
     buildTypes.each {
         it.buildConfigField 'String', 'GOOGLE_PLACES_API_KEY', '"AIzaSyCvr18oQvOjS9U2uvzo1ZOdFGiBjK08h8E"'
+        it.buildConfigField 'String', 'WEATHER_API_KEY', '"97680c0ec3284afa8cd150311170211"'
+
     }
 }
 

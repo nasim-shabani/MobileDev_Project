@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import be.pxl.hasseling.BuildConfig;
 import be.pxl.hasseling.R;
 
 
@@ -112,8 +115,33 @@ public class HomeFragment extends Fragment{
         @Override
         protected Void doInBackground(Void... voids) {
 
+            String location = "Hasselt,belgium";
+            String date = "today";
+            String tp = "24"; // Specifies the weather forecast time interval in hours.
+                              // Options are: 1 hour, 3 hourly, 6 hourly, 12 hourly (day/night) or
+                              // 24 hourly (day average).
+            String format = "json";
+
             try {
-                URL url = new URL("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=97680c0ec3284afa8cd150311170211&q=Hasselt,belgium&date=today&tp=24&format=json");
+
+                final String WEATHER_BASE_URL =
+                        "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
+                final String KEY_PARAM = "key";
+                final String LOCATION_PARAM = "q";
+                final String DATE_PARAM = "date";
+                final String TP_PARAM = "tp";
+                final String FORMAT_PARAM = "format";
+
+                Uri builtUri = Uri.parse(WEATHER_BASE_URL).buildUpon()
+                        .appendQueryParameter(KEY_PARAM, BuildConfig.WEATHER_API_KEY)
+                        .appendQueryParameter(LOCATION_PARAM, location)
+                        .appendQueryParameter(DATE_PARAM, date)
+                        .appendQueryParameter(DATE_PARAM, tp)
+                        .appendQueryParameter(FORMAT_PARAM, format)
+                        .build();
+                URL url = new URL(builtUri.toString());
+
+                //URL url = new URL("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=97680c0ec3284afa8cd150311170211&q=Hasselt,belgium&date=today&tp=24&format=json");
                 //URL url = new URL("https://api.myjson.com/bins/1gomoj");
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

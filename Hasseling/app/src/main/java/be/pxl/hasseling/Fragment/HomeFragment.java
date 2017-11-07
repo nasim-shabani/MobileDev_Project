@@ -35,13 +35,12 @@ import be.pxl.hasseling.R;
  */
 public class HomeFragment extends Fragment{
 
-    public static TextView txtV_data;
+    public static TextView txtV_temp, txtV_imageDesc;
     public static ImageView imgV_weatherIcon;
 
     //JSON Node Names
     private static final String TAG_DATA = "data";
     private static final String TAG_CONDITION = "current_condition";
-    private static final String TAG_TIME = "observation_time";
     private static final String TAG_TEMP = "temp_C";
 
     private static final String TAG_IMAGE = "weatherIconUrl";
@@ -98,7 +97,8 @@ public class HomeFragment extends Fragment{
         Fragment todoFragment= new TodoFragment();
         setOnClickButtons(btn_todo, todoFragment);
 
-        txtV_data = (TextView) view.findViewById(R.id.fetcheddata);
+        txtV_temp = (TextView) view.findViewById(R.id.temprature);
+        txtV_imageDesc = (TextView) view.findViewById(R.id.imageDesc);
         imgV_weatherIcon = (ImageView) view.findViewById(R.id.img_weather);
 
         fetchData weather = new fetchData();
@@ -125,7 +125,8 @@ public class HomeFragment extends Fragment{
     public class fetchData extends AsyncTask<Void, Void, Void>{
 
         String data = "";
-        String dataParsed = "";
+        String tempParsed = "";
+        String imageDescParsed = "";
         String imageParsed = "";
         @Override
         protected Void doInBackground(Void... voids) {
@@ -157,8 +158,6 @@ public class HomeFragment extends Fragment{
                 URL url = new URL(builtUri.toString());
 
                 //URL url = new URL("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=97680c0ec3284afa8cd150311170211&q=Hasselt,belgium&date=today&tp=24&format=json");
-                //URL url = new URL("https://api.myjson.com/bins/1gomoj");
-
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -171,7 +170,6 @@ public class HomeFragment extends Fragment{
 
                 data = buffer.toString();
 
-                //String time;
                 String temp;
                 String image;
                 String imageDesc;
@@ -190,16 +188,12 @@ public class HomeFragment extends Fragment{
                 JSONArray currentConditionImageDescArr = currentConditionObj.getJSONArray(TAG_WEATHER_DESC);
                 JSONObject currentConditionImageDescObj = currentConditionImageDescArr.getJSONObject(0);
 
-                //time = currentConditionObj.getString(TAG_TIME);
                 temp = currentConditionObj.getString(TAG_TEMP);
                 image = currentConditionImageObj.getString(TAG_IMAGE_VALUE);
                 imageDesc = currentConditionImageDescObj.getString(TAG_WEATHER_DESC_VALUE);
 
-                /*dataParsed = "Now is "+time +" o'clock"+ "\n" +
-                            "temprature is : "+temp+"°c"+ "\n" ;*/
-
-                dataParsed = "temprature is "+temp+"°c"+ "\n"+
-                            "Today is "+imageDesc;
+                tempParsed = temp+"°c"+ "\n";
+                imageDescParsed = "It's "+imageDesc;
 
                 imageParsed = image;
 
@@ -217,7 +211,8 @@ public class HomeFragment extends Fragment{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            HomeFragment.txtV_data.setText(this.dataParsed);
+            HomeFragment.txtV_temp.setText(this.tempParsed);
+            HomeFragment.txtV_imageDesc.setText(this.imageDescParsed);
             Picasso.with(getContext()).load(this.imageParsed).resize(94,94).into(imgV_weatherIcon);
         }
     }

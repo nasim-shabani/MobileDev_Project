@@ -26,6 +26,7 @@ public class DirectionFinder {
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
+    private static final String mode = "walking";
 
     public DirectionFinder(DirectionFinderListener listener, String origin, String destination) {
         this.listener = listener;
@@ -42,7 +43,7 @@ public class DirectionFinder {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
         String urlDestination = URLEncoder.encode(destination, "utf-8");
 
-        return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+        return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&mode="+ mode + "&key=" + GOOGLE_API_KEY;
     }
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {

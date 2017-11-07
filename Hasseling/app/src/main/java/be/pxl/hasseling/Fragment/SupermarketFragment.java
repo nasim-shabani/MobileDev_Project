@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -31,13 +30,15 @@ import java.util.List;
 
 import be.pxl.hasseling.BuildConfig;
 import be.pxl.hasseling.R;
+import be.pxl.hasseling.categories.GenericArrayAdapter;
+import be.pxl.hasseling.categories.Supermarket;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SupermarketFragment extends Fragment {
 
-    private ArrayAdapter<String> supermarketsAdapter;
+    private GenericArrayAdapter<Supermarket> supermarketsAdapter;
 
     public SupermarketFragment() {
         // Required empty public constructor
@@ -48,9 +49,10 @@ public class SupermarketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview =  inflater.inflate(R.layout.fragment_supermarket, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_supermarket, container, false);
 
-        String [] arraySupermarkets = {
+
+        String[] arraySupermarkets = {
                 "OEPS!",
                 "Something went wrong!", "While collecting the data",
                 "Please check the following", "Connection with internet"};
@@ -58,7 +60,7 @@ public class SupermarketFragment extends Fragment {
         List<String> supermarkets = new ArrayList<String>(
                 Arrays.asList(arraySupermarkets));
 
-        supermarketsAdapter = new ArrayAdapter<String>(
+/*        supermarketsAdapter = new ArrayAdapter<Supermarket>(
                 //current context
                 getActivity(),
                 //ID of list item layout
@@ -67,22 +69,29 @@ public class SupermarketFragment extends Fragment {
                 R.id.list_item_categorie_textview,
                 //weekForecast data
                 supermarkets
-        );
+        );*/
 
+        SupermarketFragment.FetchSupermarketTask supermarketTask = new SupermarketFragment.FetchSupermarketTask();
+        supermarketTask.execute("50.931348,5.343312");
+
+        // Construct the data source
+        ArrayList<Supermarket> arrayOfUsers = new ArrayList<Supermarket>();
+// Create the adapter to convert the array to views
+        supermarketsAdapter = new GenericArrayAdapter(this.getContext(), arrayOfUsers);
+// Attach the adapter to a ListView
         ListView listView = (ListView) rootview.findViewById(
                 R.id.listview_supermarket);
         listView.setAdapter(supermarketsAdapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String forecast = supermarketsAdapter.getItem(position);
-                /*Intent intent = new Intent(getActivity(), SupermarketDetailsActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, forecast);
-                startActivity(intent);*/
+                // Access the row position here to get the correct data item
+                Supermarket supermarket = supermarketsAdapter.getItem(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("supermarketdetail_text", forecast);
+                bundle.putString("supermarketdetail_text", String.valueOf(supermarket.getPlaceId()));
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -94,54 +103,20 @@ public class SupermarketFragment extends Fragment {
             }
         });
 
-        SupermarketFragment.FetchSupermarketTask supermarketTask = new SupermarketFragment.FetchSupermarketTask();
-        supermarketTask.execute("50.931348,5.343312");
-
-
-        //ADDED BY NASIM - To pass a string between fragments -
-        // miss kan die je helpen om de details te kunnen tonen,
-        // Van de SupermarketFragment naar  de SupermarketDetailsFragment,
-        //thankyouuuuuuuuuuuuuuu ~ dani
-/*        final EditText sampleTxt;
-        Button  submitBtn;
-
-        sampleTxt = (EditText) rootview.findViewById(R.id.SampleTxt);
-        submitBtn = (Button) rootview.findViewById(R.id.SubmitBtn);
-
-        submitBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                String txt = sampleTxt.getText().toString();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("SampleTxt", txt);
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                SupermarketDetailsFragment supermarketDetailsFragment = new SupermarketDetailsFragment();
-                supermarketDetailsFragment.setArguments(bundle);
-
-                fragmentTransaction.replace(R.id.content_frame, supermarketDetailsFragment);
-                fragmentTransaction.commit();
-            }
-        });*/
-
-
         return rootview;
     }
 
-    public class FetchSupermarketTask extends AsyncTask<String, Void, List<String>> {
+    public class FetchSupermarketTask extends AsyncTask<String, Void, List<Supermarket>> {
         private final String LOG_TAG = SupermarketFragment.FetchSupermarketTask.class.getSimpleName();
 
         /**
          * Take the String representing the complete supermarkets in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
-         *
+         * <p>
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
          * into an Object hierarchy for us.
          */
-        private List<String> getSupermarketDataFromJson(String supermarketJsonStr)
+        private List<Supermarket> getSupermarketDataFromJson(String supermarketJsonStr)
                 throws JSONException {
 
             // These are the names of the JSON objects that need to be extracted.
@@ -149,41 +124,56 @@ public class SupermarketFragment extends Fragment {
 
             final String OWN_OPENINGHOURS = "opening_hours";
             final String OWN_OPENNOW = "open_now";
+            final String OWN_PHOTOS = "photos";
 
             final String OWM_NAME = "name";
-            final String OWM_RATING= "rating";
+            final String OWM_RATING = "rating";
             final String OWM_VICINITY = "vicinity";
+            final String OWM_PLACEID = "place_id";
+            final String OWM_PHOTOREFERENCE = "photo_reference";
 
             JSONObject supermarketJson = new JSONObject(supermarketJsonStr);
             JSONArray supermarketsrArray = supermarketJson.getJSONArray(OWM_RESULTS);
 
-            List<String> resultStrs = new ArrayList<>();
-            for(int i = 0; i < supermarketsrArray.length(); i++) {
+            List<Supermarket> resultStrs = new ArrayList<>();
+            for (int i = 0; i < supermarketsrArray.length(); i++) {
                 String name;
-                String openNow;
-                String rating;
+                Boolean openNow;
+                Long rating;
                 String vicinity;
+                String placeID;
+                String photoReference = "";
 
                 // Get the JSON object representing the  supermarket
                 JSONObject supermarket = supermarketsrArray.getJSONObject(i);
 
                 name = supermarket.getString(OWM_NAME);
-                vicinity= supermarket.getString(OWM_VICINITY);
+                vicinity = supermarket.getString(OWM_VICINITY);
+                placeID = supermarket.getString(OWM_PLACEID);
 
                 if (supermarket.has(OWM_RATING)) {
-                    rating = Math.round(supermarket.getLong(OWM_RATING)) + " stars";
-                }else{
-                    rating = "No rating";
+                    rating = supermarket.getLong(OWM_RATING);
+                } else {
+                    rating = null;
                 }
 
                 if (supermarket.has(OWN_OPENINGHOURS)) {
                     JSONObject openingHoursObject = supermarket.getJSONObject(OWN_OPENINGHOURS);
-                    boolean openNowBool = openingHoursObject.getBoolean(OWN_OPENNOW);
-                    openNow = ((openNowBool == true) ? "OPEN NOW!" : "CLOSED ATM");
-                }else{
-                    openNow = "Unknown";
+                    openNow = openingHoursObject.getBoolean(OWN_OPENNOW);
+                } else {
+                    openNow = null;
                 }
-                resultStrs.add(name  + "\t - " + rating + "\n"  +  openNow + "\n" + vicinity);
+
+                if (supermarket.has(OWN_PHOTOS)) {
+                    JSONArray supermarketsrPhotosArray = supermarket.getJSONArray(OWN_PHOTOS);
+                    JSONObject supermarketPhotosObj = supermarketsrPhotosArray.getJSONObject(0);
+                    photoReference = supermarketPhotosObj.getString(OWM_PHOTOREFERENCE);
+                } else {
+                    photoReference = "default";
+                }
+
+                resultStrs.add(new Supermarket(placeID, name, rating, openNow, vicinity, photoReference));
+
             }
           /*  for (String s : resultStrs) { //for testing porpuse
                Log.v(LOG_TAG, "Supermarket entry: " + s);
@@ -193,7 +183,7 @@ public class SupermarketFragment extends Fragment {
         }
 
         @Override
-        protected List<String> doInBackground(String... params) {
+        protected List<Supermarket> doInBackground(String... params) {
             // If there's no location , there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
                 return null;
@@ -269,7 +259,7 @@ public class SupermarketFragment extends Fragment {
                 // to parse it.
                 supermarketsJsonStr = null;
                 return null;
-            } finally{
+            } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
@@ -294,10 +284,10 @@ public class SupermarketFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(List<String> result) {
+        protected void onPostExecute(List<Supermarket> result) {
             if (result != null) {
                 supermarketsAdapter.clear();
-                for(String supermarketStr : result) {
+                for (Supermarket supermarketStr : result) {
                     supermarketsAdapter.add(supermarketStr);
                 }
             }
@@ -305,3 +295,5 @@ public class SupermarketFragment extends Fragment {
     }
 
 }
+
+

@@ -7,33 +7,6 @@
     app:layout_collapseParallaxMultiplier="1.0"
     tools:context="be.pxl.hasseling.Fragment.SupermarketFragment">
 
-        <!--ADDED BY NASIM-->
-        <!--        <EditText
-            android:id="@+id/SampleTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Write something here, dani" />
-
-        <Button
-            android:id="@+id/SubmitBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Click me!" />-->
-        <!--END-->
-
-
-        <TextView
-            android:id="@+id/txtViewSuper"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="11.83"
-            android:text="@string/SupermarketTitle"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
-
         <ListView
             android:id="@+id/listview_supermarket"
             android:layout_width="wrap_content"

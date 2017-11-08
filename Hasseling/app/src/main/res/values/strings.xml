@@ -8,4 +8,7 @@
     <string name="SupermarketTitle">Some supermarkets close to Dusart.</string>
     <string name="title_activity_transport">Hasseling</string>
 
+    <string name="sos_more_info_txt">If you need more details about unique places in Hasselt, click on the link below for more information.</string>
+    <string name="sos_more_info_link"><a href="http://www.guido.be/Stadsgids/Hasselt.aspx">http://www.guido.be/Stadsgids/Hasselt.aspx</a></string>
+
 </resources>

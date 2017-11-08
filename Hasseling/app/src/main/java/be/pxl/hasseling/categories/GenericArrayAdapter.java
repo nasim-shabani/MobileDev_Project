@@ -1,6 +1,9 @@
 package be.pxl.hasseling.categories;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,7 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
 
     private static class ViewHolder {
         private TextView itemView;
+        private TextView ratingView;
         private ImageView imgV_supermarketIcon;
         private RatingBar ratingBar_stars;
 
@@ -49,6 +53,7 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
             viewHolder.itemView = (TextView) convertView.findViewById(list_item_categorie_textview);
             viewHolder.imgV_supermarketIcon = (ImageView) convertView.findViewById(R.id.list_item_categorie_imageview);
             viewHolder.ratingBar_stars = (RatingBar) convertView.findViewById(R.id.ratingBar);
+            viewHolder.ratingView = (TextView) convertView.findViewById(R.id.rating_text);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -61,18 +66,22 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
             viewHolder.itemView.setText(item.toString());
             Picasso.with(this.getContext()).load(item.formatPhotoURL()).resize(250,250).into( viewHolder.imgV_supermarketIcon);
 
+         //   Log.v(LOG_TAG, "Item . Get Rating ===== : " + item.getRating());
+
             if(item.getRating() == null){
                 viewHolder.ratingBar_stars.setVisibility(viewHolder.ratingBar_stars.INVISIBLE);
+                viewHolder.ratingView.setText("No rating");
 
             }else{
-                viewHolder.ratingBar_stars.setRating((float) roundToHalf(item.getRating().doubleValue()));
+                viewHolder.ratingBar_stars.setVisibility(viewHolder.ratingBar_stars.VISIBLE);
+                Drawable drawable = viewHolder.ratingBar_stars.getProgressDrawable();
+                drawable.setColorFilter(Color.parseColor("#FF7F7F"), PorterDuff.Mode.SRC_ATOP);
+                viewHolder.ratingBar_stars.setRating((float)item.getRating());
+                viewHolder.ratingView.setText(String.valueOf(item.getRating()));
             }
         }
 
         return convertView;
     }
 
-    public  double roundToHalf(double d) {
-        return Math.round(d * 2) / 2.0;
-    }
 }

@@ -1,47 +1,183 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.pxl.hasseling.Fragment.SupermarketDetailsFragment"
-    tools:showIn="@layout/activity_supermarket_details">
-
-    <TextView
-        android:id="@+id/supermarketId_text"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_marginTop="60dp"
-        android:layout_row="22"
-        android:text="ID"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
-        android:visibility="visible"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="57dp" />
+    tools:showIn="@layout/activity_supermarket_details"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:id="@+id/name_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="47dp"
+        android:layout_below="@+id/imageView2"
         android:layout_column="0"
         android:layout_row="0"
+        android:layout_toLeftOf="@+id/openNow_switch"
         android:text="NAME"
-        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="30sp"
-        tools:ignore="HardcodedText" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded,UnknownId"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/photo_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@mipmap/ic_image"
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/name_text"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/adress_text"
-        android:layout_width="match_parent"
+        android:id="@+id/phone_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_marginTop="60dp"
-        android:layout_row="2"
-        android:text="ADDRESS"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
-        android:visibility="visible"
-        tools:ignore="HardcodedText" />
+        android:autoLink="phone"
+        android:ems="12"
+        android:inputType="phone"
+        android:textSize="18sp"
+        tools:ignore="TextViewEdits"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_above="@+id/address_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="21dp"
+        android:layout_toRightOf="@+id/weekdays_text"
+        android:layout_toEndOf="@+id/weekdays_text" />
 
-</GridLayout>
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="map"
+        android:ems="12"
+        android:freezesText="true"
+        android:inputType="textPostalAddress"
+        android:lineSpacingExtra="8sp"
+        android:lines="2"
+        android:maxLines="5"
+        android:minLines="2"
+        android:scrollbars="none"
+        android:textSize="12sp"
+        tools:ignore="TextViewEdits"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_above="@+id/mapsUrl_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="26dp"
+        android:layout_toRightOf="@+id/weekdays_text"
+        android:layout_toEndOf="@+id/weekdays_text" />
+
+    <TextView
+        android:id="@+id/internationalPhone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="phone"
+        android:ems="12"
+        android:inputType="numberSigned"
+        android:textSize="18sp"
+        tools:ignore="RtlHardcoded,TextFields,TextViewEdits"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_above="@+id/phone_text"
+        android:layout_toRightOf="@+id/weekdays_text"
+        android:layout_toEndOf="@+id/weekdays_text"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:id="@+id/weekdays_text"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/details_ratingbar"
+        android:elevation="1dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textSize="10sp"
+        tools:ignore="SmallSp,TextViewEdits"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/mapsUrl_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        tools:ignore="TextFields,TextViewEdits"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/weekdays_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/website_text"
+        android:layout_alignEnd="@+id/website_text" />
+
+    <TextView
+        android:id="@+id/website_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="RtlHardcoded,TextViewEdits"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_below="@+id/mapsUrl_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/phone_text"
+        android:layout_alignEnd="@+id/phone_text" />
+
+    <Button
+        android:id="@+id/bacl_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to list"
+        tools:ignore="HardcodedText"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Switch
+        android:id="@+id/openNow_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="Open"
+        tools:checked="false"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RatingBar
+        android:id="@+id/details_ratingbar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/photo_view"
+        android:layout_alignRight="@+id/name_text"
+        android:layout_alignEnd="@+id/name_text" />
+
+</RelativeLayout>

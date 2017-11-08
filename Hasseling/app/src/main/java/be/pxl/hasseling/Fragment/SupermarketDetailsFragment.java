@@ -9,8 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,12 +49,10 @@ public class SupermarketDetailsFragment extends Fragment {
 
         //ADDED bY NASIM
         Bundle bundle = getArguments();
-        String txt = bundle.getString("supermarketdetail_text");
-        TextView sampleText = (TextView) rootView.findViewById(R.id.supermarketId_text);
-        sampleText.setText(txt);
+        String id = bundle.getString("supermarketdetail_text");
 
         SupermarketDetailsFragment.FetchSupermarketDetailTask supermarketDetailTask = new SupermarketDetailsFragment.FetchSupermarketDetailTask();
-        supermarketDetailTask.execute(txt);
+        supermarketDetailTask.execute(id);
 
 
 
@@ -74,29 +77,79 @@ public class SupermarketDetailsFragment extends Fragment {
 
             final String OWN_OPENINGHOURS = "opening_hours";
             final String OWN_OPENNOW = "open_now";
+            final String OWN_WEEKDAY = "weekday_text";
+            final String OWN_PHOTOS = "photos";
+            final String OWM_PHOTOREFERENCE = "photo_reference";
 
+            final String OWM_ADDRESS = "formatted_address";
+            final String OWM_FORMPHONE = "formatted_phone_number";
+            final String OWM_INTPHONE = "international_phone_number";
             final String OWM_NAME = "name";
             final String OWM_RATING= "rating";
-            final String OWM_VICINITY = "vicinity";
-            final String OWM_PLACEID = "place_id";
+            final String OWM_URL= "url";
+            final String OWM_WEBSITE= "website";
 
             JSONObject supermarketJson = new JSONObject(supermarketJsonStr);
             JSONObject supermarketJsonResult = supermarketJson.getJSONObject(OWM_RESULT);
 
             List<String> resultStrs = new ArrayList<>();
-                String name;
-                Boolean openNow;
-                Long rating;
-                String vicinity;
+            String formatted_address;
+            String formatted_phone_number;
+            String international_phone_number;
+            String name;
+            Boolean openNow;
+            String weekday_text = "UNKOWN";
+            String photo_reference;
+            Long rating;
+            String url, website;
 
                 // Get the JSON object representing the  supermarket
                // JSONObject supermarket = supermarketsrArray.getJSONObject(i);
+            formatted_address= supermarketJsonResult.getString(OWM_ADDRESS);
+            formatted_phone_number= supermarketJsonResult.getString(OWM_FORMPHONE);
+            international_phone_number= supermarketJsonResult.getString(OWM_INTPHONE);
+            name = supermarketJsonResult.getString(OWM_NAME);
 
-                name = supermarketJsonResult.getString(OWM_NAME);
-                vicinity= supermarketJsonResult.getString(OWM_VICINITY);
+            if (supermarketJsonResult.has(OWN_OPENINGHOURS)) {
+                JSONObject openingHoursObject = supermarketJsonResult.getJSONObject(OWN_OPENINGHOURS);
+                openNow = openingHoursObject.getBoolean(OWN_OPENNOW);
+                if(supermarketJson.has(OWN_WEEKDAY)){
+                    JSONArray supermarketsrWeekdayArray = supermarketJsonResult.getJSONArray(OWN_WEEKDAY);
+                    weekday_text = supermarketsrWeekdayArray.toString();
+                }
+            } else {
+                openNow = null;
+            }
 
-                resultStrs.add(name + " ");
-            resultStrs.add(vicinity);
+            if (supermarketJsonResult.has(OWN_PHOTOS)) {
+                JSONArray supermarketsrPhotosArray = supermarketJsonResult.getJSONArray(OWN_PHOTOS);
+                JSONObject supermarketPhotosObj = supermarketsrPhotosArray.getJSONObject(0);
+                photo_reference = supermarketPhotosObj.getString(OWM_PHOTOREFERENCE);
+            } else {
+                photo_reference = "default";
+            }
+
+            if (supermarketJsonResult.has(OWM_RATING)) {
+                rating = supermarketJsonResult.getLong(OWM_RATING);
+            } else {
+                rating = null;
+            }
+
+            url = supermarketJsonResult.getString(OWM_URL);
+            website = supermarketJsonResult.getString(OWM_WEBSITE);
+
+
+            resultStrs.add(formatted_address);
+            resultStrs.add(formatted_phone_number);
+            resultStrs.add(international_phone_number);
+            resultStrs.add(name);
+        //    resultStrs.add(openNow);
+            resultStrs.add(weekday_text);
+            resultStrs.add(photo_reference);
+        //    resultStrs.add(rating);
+            resultStrs.add(url);
+            resultStrs.add(website);
+
    /*         for (String s : resultStrs) { //for testing porpuse
                Log.v(LOG_TAG, "Supermarket entry: " + s);
             }*/
@@ -199,11 +252,32 @@ public class SupermarketDetailsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(List<String> result) {
-            TextView name_text = (TextView) rootView.findViewById(R.id.name_text);
-            name_text.setText(result.get(0));
-            TextView adress_text = (TextView) rootView.findViewById(R.id.adress_text);
-            adress_text.setText(result.get(1));
 
+            //TEST OP WAARDE NULL - EXCEPTION
+            TextView formatted_address  = (TextView) rootView.findViewById(R.id.address_text);
+            formatted_address.setText(result.get(0));
+
+            TextView formatted_phone_number   = (TextView) rootView.findViewById(R.id.phone_text);
+            formatted_phone_number.setText(result.get(1));
+
+            TextView international_phone_number    = (TextView) rootView.findViewById(R.id.internationalPhone_text);
+            international_phone_number.setText(result.get(2));
+
+            TextView name_text = (TextView) rootView.findViewById(R.id.name_text);
+            name_text.setText(result.get(3));
+
+            TextView weekday_text = (TextView) rootView.findViewById(R.id.weekdays_text );
+            weekday_text.setText(result.get(4));
+
+            ImageView photo_reference = (ImageView)rootView.findViewById(R.id.photo_view );
+            Picasso.with(getContext()).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + result.get(5) + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY).resize(250,250).into(photo_reference);
+//CHECK OP geen foto
+
+            TextView url = (TextView) rootView.findViewById(R.id.mapsUrl_text  );
+            url.setText(result.get(6));
+
+            TextView website  = (TextView) rootView.findViewById(R.id.website_text  );
+            website.setText(result.get(7));
         }
     }
 

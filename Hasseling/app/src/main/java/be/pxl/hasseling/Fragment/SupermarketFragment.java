@@ -89,7 +89,7 @@ public class SupermarketFragment extends Fragment {
                 // Access the row position here to get the correct data item
                 Supermarket supermarket = supermarketsAdapter.getItem(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("supermarketdetail_text", String.valueOf(supermarket.getPlaceId()));
+                bundle.putString("supermarketPlaceID", String.valueOf(supermarket.getPlaceId()));
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

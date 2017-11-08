@@ -12,6 +12,10 @@ public class Supermarket extends Category {
 
     }
 
+    public Supermarket() {
+        super();
+    }
+
     @Override
     public String toString() {
         return super.getName() + "\n " +

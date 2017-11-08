@@ -1,16 +1,20 @@
 package be.pxl.hasseling.Fragment;
 
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -25,11 +29,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import be.pxl.hasseling.BuildConfig;
 import be.pxl.hasseling.R;
+import be.pxl.hasseling.categories.Supermarket;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,17 +52,30 @@ public class SupermarketDetailsFragment extends Fragment {
 
         //ADDED bY NASIM
         Bundle bundle = getArguments();
-        String id = bundle.getString("supermarketdetail_text");
+        String id = bundle.getString("supermarketPlaceID");
 
         SupermarketDetailsFragment.FetchSupermarketDetailTask supermarketDetailTask = new SupermarketDetailsFragment.FetchSupermarketDetailTask();
         supermarketDetailTask.execute(id);
+       Button btn_back= (Button) rootView.findViewById(R.id.backCategory_btn);
+        final Fragment supermarketFragment= new SupermarketFragment();
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Fragment fr= new fragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                transaction.replace(R.id.content_frame, supermarketFragment);
+                transaction.commitAllowingStateLoss();
+            }
+        });
 
 
         return rootView;
     }
 
-    public class FetchSupermarketDetailTask extends AsyncTask<String, Void, List<String>> {
+    public class FetchSupermarketDetailTask extends AsyncTask<String, Void, Supermarket> {
         private final String LOG_TAG = SupermarketDetailsFragment.FetchSupermarketDetailTask.class.getSimpleName();
 
         /**
@@ -69,7 +85,7 @@ public class SupermarketDetailsFragment extends Fragment {
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
          * into an Object hierarchy for us.
          */
-        private List<String> getSupermarketDataFromJson(String supermarketJsonStr)
+        private Supermarket getSupermarketDataFromJson(String supermarketJsonStr)
                 throws JSONException {
 
             // These are the names of the JSON objects that need to be extracted.
@@ -92,33 +108,36 @@ public class SupermarketDetailsFragment extends Fragment {
             JSONObject supermarketJson = new JSONObject(supermarketJsonStr);
             JSONObject supermarketJsonResult = supermarketJson.getJSONObject(OWM_RESULT);
 
-            List<String> resultStrs = new ArrayList<>();
+            Supermarket supermarketObj = new Supermarket();
             String formatted_address;
             String formatted_phone_number;
             String international_phone_number;
             String name;
             Boolean openNow;
-            String weekday_text = "UNKOWN";
+            String weekday_text = null;
             String photo_reference;
             Long rating;
             String url, website;
 
-                // Get the JSON object representing the  supermarket
-               // JSONObject supermarket = supermarketsrArray.getJSONObject(i);
-            formatted_address= supermarketJsonResult.getString(OWM_ADDRESS);
-            formatted_phone_number= supermarketJsonResult.getString(OWM_FORMPHONE);
-            international_phone_number= supermarketJsonResult.getString(OWM_INTPHONE);
-            name = supermarketJsonResult.getString(OWM_NAME);
+             formatted_address = supermarketJsonResult.has(OWM_ADDRESS) ? supermarketJsonResult.getString(OWM_ADDRESS) : "No address";
+            formatted_phone_number= supermarketJsonResult.has(OWM_FORMPHONE) ? supermarketJsonResult.getString(OWM_FORMPHONE): "No Phonenumber";
+            international_phone_number= supermarketJsonResult.has(OWM_INTPHONE) ? supermarketJsonResult.getString(OWM_INTPHONE): "No International Phonenumber";
+            name =  supermarketJsonResult.has(OWM_NAME) ? supermarketJsonResult.getString(OWM_NAME): "No Name available";
 
             if (supermarketJsonResult.has(OWN_OPENINGHOURS)) {
                 JSONObject openingHoursObject = supermarketJsonResult.getJSONObject(OWN_OPENINGHOURS);
                 openNow = openingHoursObject.getBoolean(OWN_OPENNOW);
-                if(supermarketJson.has(OWN_WEEKDAY)){
-                    JSONArray supermarketsrWeekdayArray = supermarketJsonResult.getJSONArray(OWN_WEEKDAY);
-                    weekday_text = supermarketsrWeekdayArray.toString();
+                if(openingHoursObject.has(OWN_WEEKDAY)){
+                    JSONArray supermarketsrWeekdayArray = openingHoursObject.getJSONArray(OWN_WEEKDAY);
+                    weekday_text = "";
+                    for (int i=0; i < supermarketsrWeekdayArray.length(); i++) {
+
+                        weekday_text += supermarketsrWeekdayArray.getString(i) + "\n";
+                    }
                 }
             } else {
                 openNow = null;
+                weekday_text = "UNKOWN";
             }
 
             if (supermarketJsonResult.has(OWN_PHOTOS)) {
@@ -135,30 +154,29 @@ public class SupermarketDetailsFragment extends Fragment {
                 rating = null;
             }
 
-            url = supermarketJsonResult.getString(OWM_URL);
-            website = supermarketJsonResult.getString(OWM_WEBSITE);
+            url =supermarketJsonResult.has(OWM_URL) ? supermarketJsonResult.getString(OWM_URL): "No URL available";
+            website = supermarketJsonResult.has(OWM_WEBSITE) ?supermarketJsonResult.getString(OWM_WEBSITE): "No Website available";
 
 
-            resultStrs.add(formatted_address);
-            resultStrs.add(formatted_phone_number);
-            resultStrs.add(international_phone_number);
-            resultStrs.add(name);
-        //    resultStrs.add(openNow);
-            resultStrs.add(weekday_text);
-            resultStrs.add(photo_reference);
-        //    resultStrs.add(rating);
-            resultStrs.add(url);
-            resultStrs.add(website);
+            supermarketObj.setAddress(formatted_address);
+            supermarketObj.setFormatted_phone_number(formatted_phone_number);
+            supermarketObj.setInternational_phone_number(international_phone_number);
+            supermarketObj.setName(name);
+            supermarketObj.setOpenNow(openNow);
+            supermarketObj.setWeekday_text(weekday_text);
+            supermarketObj.setPhotoReference(photo_reference);
+            supermarketObj.setRating(rating);
+            supermarketObj.setUrl(url);
+            supermarketObj.setWebsite(website);
 
-   /*         for (String s : resultStrs) { //for testing porpuse
-               Log.v(LOG_TAG, "Supermarket entry: " + s);
-            }*/
-            return resultStrs;
+     //    Log.v(LOG_TAG, supermarketObj.toString());
+
+            return supermarketObj;
 
         }
 
         @Override
-        protected List<String> doInBackground(String... params) {
+        protected Supermarket doInBackground(String... params) {
             // If there's no location , there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
                 return null;
@@ -185,8 +203,8 @@ public class SupermarketDetailsFragment extends Fragment {
                         .build();
                 URL url = new URL(builtUri.toString());
 
-          //       Log.v(LOG_TAG, "Built URI " + builtUri.toString());
-           //       Log.v(LOG_TAG, "Forecast string: " + supermarketsJsonStr);
+          //Log.v(LOG_TAG, "Built URI " + builtUri.toString());
+           //Log.v(LOG_TAG, "Forecast string: " + supermarketsJsonStr);
                 //Debugging purpose
 
                 // Create the request to OpenWeatherMap, and open the connection
@@ -251,33 +269,68 @@ public class SupermarketDetailsFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(List<String> result) {
+        protected void onPostExecute(Supermarket result) {
 
             //TEST OP WAARDE NULL - EXCEPTION
             TextView formatted_address  = (TextView) rootView.findViewById(R.id.address_text);
-            formatted_address.setText(result.get(0));
+            formatted_address.setText(result.getAddress());
 
             TextView formatted_phone_number   = (TextView) rootView.findViewById(R.id.phone_text);
-            formatted_phone_number.setText(result.get(1));
+            formatted_phone_number.setText(result.getFormatted_phone_number());
 
             TextView international_phone_number    = (TextView) rootView.findViewById(R.id.internationalPhone_text);
-            international_phone_number.setText(result.get(2));
+            international_phone_number.setText(result.getInternational_phone_number());
 
             TextView name_text = (TextView) rootView.findViewById(R.id.name_text);
-            name_text.setText(result.get(3));
+            name_text.setText(result.getName());
 
             TextView weekday_text = (TextView) rootView.findViewById(R.id.weekdays_text );
-            weekday_text.setText(result.get(4));
+            weekday_text.setText(result.getWeekday_text());
 
             ImageView photo_reference = (ImageView)rootView.findViewById(R.id.photo_view );
-            Picasso.with(getContext()).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + result.get(5) + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY).resize(250,250).into(photo_reference);
-//CHECK OP geen foto
+            if(result.getPhotoReference().equals("default")){
+                Picasso.with(getContext()).load("https://png.icons8.com/ingredients/color/50/000000").resize(250,250).into(photo_reference);
+            }else{
+                Picasso.with(getContext()).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + result.getPhotoReference() + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY).resize(250,250).into(photo_reference);
+            }
+
+            RatingBar ratingBar_stars = (RatingBar) rootView.findViewById(R.id.details_ratingbar);
+            TextView ratingView = (TextView) rootView.findViewById(R.id.ratingDetail_text );
+
+            if(result.getRating() == null){
+                ratingBar_stars.setVisibility(ratingBar_stars.INVISIBLE);
+                ratingView.setVisibility(ratingBar_stars.VISIBLE);
+                ratingView.setText("No rating");
+            }else {
+                ratingBar_stars.setVisibility(ratingBar_stars.VISIBLE);
+                ratingView.setVisibility(ratingBar_stars.INVISIBLE);
+
+  /*              Drawable drawable = ratingBar_stars.getProgressDrawable();
+                drawable.setColorFilter(Color.parseColor("#FF7F7F"), PorterDuff.Mode.SRC_ATOP);*/
+                ratingBar_stars.setRating((float) result.getRating());
+            }
+
+
+            Switch openNowSwitch = (Switch) rootView.findViewById(R.id.openNow_switch);
+            openNowSwitch.setClickable(false);
+            openNowSwitch.setText(result.formatOpen());
+
+            if(result.getOpenNow() == true){
+                    openNowSwitch.setChecked(false);
+                    openNowSwitch.setTextColor(Color.parseColor("green"));
+                openNowSwitch.setBackgroundColor(Color.parseColor("green"));
+            }else{
+                openNowSwitch.setChecked(true);
+                openNowSwitch.setTextColor(Color.parseColor("red"));
+                openNowSwitch.setBackgroundColor(Color.parseColor("red"));
+
+            }
 
             TextView url = (TextView) rootView.findViewById(R.id.mapsUrl_text  );
-            url.setText(result.get(6));
+            url.setText(result.getUrl());
 
             TextView website  = (TextView) rootView.findViewById(R.id.website_text  );
-            website.setText(result.get(7));
+            website.setText(result.getWebsite());
         }
     }
 

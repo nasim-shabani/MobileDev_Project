@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import be.pxl.hasseling.Fragment.ClubFragment;
 import be.pxl.hasseling.Fragment.DrinkFragment;
@@ -59,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         nDrawerLayout.addDrawerListener(nToggle);
         nToggle.syncState();
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+        View view =getSupportActionBar().getCustomView();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

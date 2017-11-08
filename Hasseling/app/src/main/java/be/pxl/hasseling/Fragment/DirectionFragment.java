@@ -1,13 +1,11 @@
 package be.pxl.hasseling.Fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +35,7 @@ import be.pxl.hasseling.Module.DirectionFinder;
 import be.pxl.hasseling.Module.DirectionFinderListener;
 import be.pxl.hasseling.Module.Route;
 
-public class TransportFragment extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
+public class DirectionFragment extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
 
     private GoogleMap mMap;
     private Button btnFindPath;
@@ -51,7 +49,7 @@ public class TransportFragment extends Fragment implements OnMapReadyCallback, D
     View rootView;
 
 
-    public TransportFragment() {
+    public DirectionFragment() {
         // Required empty public constructor
     }
 
@@ -60,7 +58,7 @@ public class TransportFragment extends Fragment implements OnMapReadyCallback, D
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_transport, container, false);
+        rootView = inflater.inflate(R.layout.fragment_direction, container, false);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

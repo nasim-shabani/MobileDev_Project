@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment{
 
 
     Button btn_supermarket, btn_restaurant, btn_laundry, btn_drink,
-            btn_transport, btn_club, btn_fitness, btn_todo;
+            btn_direction, btn_club, btn_fitness, btn_sos;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -81,9 +81,9 @@ public class HomeFragment extends Fragment{
         Fragment drinkFragment= new DrinkFragment();
         setOnClickButtons(btn_drink, drinkFragment);
 
-        btn_transport= (Button) view.findViewById(R.id.btn_transport);
-        Fragment transportFragment= new TransportFragment();
-        setOnClickButtons(btn_transport, transportFragment);
+        btn_direction = (Button) view.findViewById(R.id.btn_direction);
+        Fragment directionFragment= new DirectionFragment();
+        setOnClickButtons(btn_direction, directionFragment);
 
         btn_club= (Button) view.findViewById(R.id.btn_club);
         Fragment clubFragment= new ClubFragment();
@@ -93,9 +93,9 @@ public class HomeFragment extends Fragment{
         Fragment fitnessFragment= new FitnessFragment();
         setOnClickButtons(btn_fitness, fitnessFragment);
 
-        btn_todo= (Button) view.findViewById(R.id.btn_todo);
-        Fragment todoFragment= new TodoFragment();
-        setOnClickButtons(btn_todo, todoFragment);
+        btn_sos = (Button) view.findViewById(R.id.btn_sos);
+        Fragment sosFragment= new SOSFragment();
+        setOnClickButtons(btn_sos, sosFragment);
 
         txtV_temp = (TextView) view.findViewById(R.id.temprature);
         txtV_imageDesc = (TextView) view.findViewById(R.id.imageDesc);

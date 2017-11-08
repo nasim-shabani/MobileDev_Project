@@ -28,13 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RestaurantActivity" />
         <activity android:name=".activity.SupermarketActivity" />
-        <activity android:name=".activity.LaundryActivity" />
-        <activity android:name=".activity.DrinkActivity" />
-        <activity android:name=".activity.ClubActivity" />
-        <activity android:name=".activity.FitnessActivity" />
-        <activity android:name=".activity.TodoActivity" />
         <activity
             android:name=".activity.SupermarketDetailsActivity"
             android:parentActivityName=".activity.SupermarketActivity"

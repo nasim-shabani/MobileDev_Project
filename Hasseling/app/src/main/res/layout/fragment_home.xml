@@ -125,10 +125,10 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/btn_transport"
-                android:drawableLeft="@mipmap/ic_transport"
+                android:id="@+id/btn_fitness"
+                android:drawableLeft="@mipmap/ic_fitness"
                 android:theme="@style/AppTheme.Button"
-                android:text="Transport"
+                android:text="Fitness"
                 android:textSize="12sp" />
 
             <Button
@@ -147,17 +147,17 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/btn_fitness"
-                android:drawableLeft="@mipmap/ic_fitness"
+                android:id="@+id/btn_direction"
+                android:drawableLeft="@mipmap/ic_direction"
                 android:theme="@style/AppTheme.Button"
-                android:text="Fitness"
+                android:text="DirectionFinder"
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/btn_todo"
-                android:drawableLeft="@mipmap/ic_todo"
+                android:id="@+id/btn_sos"
+                android:drawableLeft="@mipmap/ic_sos"
                 android:theme="@style/AppTheme.Button"
-                android:text="To Do"
+                android:text="SOS"
                 android:textSize="12sp" />
 
         </TableRow>

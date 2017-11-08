@@ -19,8 +19,8 @@ import be.pxl.hasseling.Fragment.HomeFragment;
 import be.pxl.hasseling.Fragment.LaundryFragment;
 import be.pxl.hasseling.Fragment.RestaurantFragment;
 import be.pxl.hasseling.Fragment.SupermarketFragment;
-import be.pxl.hasseling.Fragment.TodoFragment;
-import be.pxl.hasseling.Fragment.TransportFragment;
+import be.pxl.hasseling.Fragment.SOSFragment;
+import be.pxl.hasseling.Fragment.DirectionFragment;
 import be.pxl.hasseling.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_RESTAURANT = "restaurant";
     private static final String TAG_LAUNDRY = "laundry";
     private static final String TAG_DRINK = "drink";
-    private static final String TAG_TRANSPORT = "transport";
+    private static final String TAG_DIRECTION = "direction";
     private static final String TAG_CLUB = "club";
     private static final String TAG_FITNESS = "fitness";
-    private static final String TAG_TODO = "todo";
+    private static final String TAG_SOS = "SOS";
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
@@ -114,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 return drinkFragment;
             case 5:
                 // transport fragment
-                TransportFragment transportFragment = new TransportFragment();
-                return transportFragment;
+                DirectionFragment directionFragment = new DirectionFragment();
+                return directionFragment;
             case 6:
                 // club fragment
                 ClubFragment clubFragment = new ClubFragment();
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 return fitnessFragment;
              case 8:
                 // to do fragment
-                TodoFragment todoFragment = new TodoFragment();
-                return todoFragment;
+                SOSFragment SOSFragment = new SOSFragment();
+                return SOSFragment;
 
             default:
                 return new HomeFragment();
@@ -240,9 +240,9 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_DRINK;
                         nDrawerLayout.closeDrawers();
                         break;
-                    case R.id.nav_transport:
+                    case R.id.nav_direction:
                         navItemIndex = 5;
-                        CURRENT_TAG = TAG_TRANSPORT;
+                        CURRENT_TAG = TAG_DIRECTION;
                         nDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_club:
@@ -255,9 +255,9 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_FITNESS;
                         nDrawerLayout.closeDrawers();
                         break;
-                    case R.id.nav_todo:
+                    case R.id.nav_sos:
                         navItemIndex = 8;
-                        CURRENT_TAG = TAG_TODO;
+                        CURRENT_TAG = TAG_SOS;
                         nDrawerLayout.closeDrawers();
                         break;
                     /*case R.id.nav_restaurant:

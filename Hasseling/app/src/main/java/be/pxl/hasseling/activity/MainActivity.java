@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 // restaurant fragment
                /* RestaurantFragment restaurantFragment = new RestaurantFragment();
                 return restaurantFragment;*/
-                bundle.putString("Keyword","restaurants");//DANIE
+                bundle.putString("Keyword","restaurant");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
             case 3:
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 // drink fragment
                 /*DrinkFragment drinkFragment = new DrinkFragment();
                 return drinkFragment;*/
-                bundle.putString("Keyword","drink");//DANIE
+                bundle.putString("Keyword","cafe");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
             case 5:

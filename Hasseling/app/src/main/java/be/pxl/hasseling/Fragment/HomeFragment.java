@@ -144,13 +144,13 @@ public class HomeFragment extends Fragment{
                 keyword = "convenience_store";
                 break;
             case "btn_restaurant":
-                keyword = "restaurants";
+                keyword = "restaurant";
                 break;
             case "btn_laundry":
                 keyword = "laundry";
                 break;
             case "btn_drink":
-                keyword = "drink";
+                keyword = "cafe";
                 break;
             case "btn_club":
                 keyword = "club";

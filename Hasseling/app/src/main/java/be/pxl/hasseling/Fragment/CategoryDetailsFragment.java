@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,7 +135,7 @@ public class CategoryDetailsFragment extends Fragment {
                 openNow = openingHoursObject.getBoolean(OWN_OPENNOW);
                 if(openingHoursObject.has(OWN_WEEKDAY)){
                     JSONArray categorysrWeekdayArray = openingHoursObject.getJSONArray(OWN_WEEKDAY);
-                    weekday_text = "";
+                    weekday_text = "\n";
                     for (int i=0; i < categorysrWeekdayArray.length(); i++) {
 
                         weekday_text += categorysrWeekdayArray.getString(i) + "\n";
@@ -141,7 +143,7 @@ public class CategoryDetailsFragment extends Fragment {
                 }
             } else {
                 openNow = null;
-                weekday_text = "UNKOWN";
+                weekday_text = "No Openinghours found. "+ "\n" + "Sorry :(";
             }
 
             if (categoryJsonResult.has(OWN_PHOTOS)) {
@@ -158,8 +160,8 @@ public class CategoryDetailsFragment extends Fragment {
                 rating = null;
             }
 
-            url =categoryJsonResult.has(OWM_URL) ? categoryJsonResult.getString(OWM_URL): "No URL available";
-            website = categoryJsonResult.has(OWM_WEBSITE) ?categoryJsonResult.getString(OWM_WEBSITE): "No Website available";
+            url =categoryJsonResult.has(OWM_URL) ? categoryJsonResult.getString(OWM_URL): "No route available";
+            website = categoryJsonResult.has(OWM_WEBSITE) ?categoryJsonResult.getString(OWM_WEBSITE): "No website available";
 
 
             categoryObj.setAddress(formatted_address);
@@ -276,6 +278,7 @@ public class CategoryDetailsFragment extends Fragment {
         protected void onPostExecute(Category result) {
 
             //TEST OP WAARDE NULL - EXCEPTION
+            //SOURCE https://stackoverflow.com/questions/9290651/make-a-hyperlink-textview-in-android
             TextView formatted_address  = (TextView) rootView.findViewById(R.id.address_text);
             formatted_address.setText(result.getAddress());
 
@@ -329,11 +332,29 @@ public class CategoryDetailsFragment extends Fragment {
 
             }
             }
+
+
             TextView url = (TextView) rootView.findViewById(R.id.mapsUrl_text  );
-            url.setText(result.getUrl());
+            if(result.getUrl().startsWith("No")){
+                url.setText(result.getWebsite());
+            }else{
+                url.setClickable(true);
+                url.setMovementMethod(LinkMovementMethod.getInstance());
+                String mapsURL = "<a href='" + result.getUrl() + "'>Open route here</a>";
+                url.setText(Html.fromHtml(mapsURL));
+            }
+
+
 
             TextView website  = (TextView) rootView.findViewById(R.id.website_text  );
-            website.setText(result.getWebsite());
+            if(result.getWebsite().startsWith("No")){
+                website.setText(result.getWebsite());
+            }else{
+                website.setClickable(true);
+                website.setMovementMethod(LinkMovementMethod.getInstance());
+                String websiteURL = "<a href='" + result.getWebsite() + "'>Check their site</a>";
+                website.setText(Html.fromHtml(websiteURL));
+            }
         }
     }
 }

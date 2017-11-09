@@ -28,15 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SupermarketActivity" />
-        <activity
-            android:name=".activity.SupermarketDetailsActivity"
-            android:parentActivityName=".activity.SupermarketActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.pxl.hasseling.activity.SupermarketActivity" />
-        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

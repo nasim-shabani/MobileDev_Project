@@ -1,0 +1,203 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.pxl.hasseling.Fragment.CategoryDetailsFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView2"
+        android:layout_column="0"
+        android:layout_row="0"
+        android:layout_toLeftOf="@+id/openNow_switch"
+        android:text="NAME"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,ObsoleteLayoutParam,RtlHardcoded,UnknownId"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/photo_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/name_text"
+        android:layout_toLeftOf="@+id/backCategory_btn"
+        android:layout_toStartOf="@+id/backCategory_btn"
+        app:srcCompat="@mipmap/ic_image"
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/phone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/internationalPhone_text"
+        android:layout_marginTop="11dp"
+        android:autoLink="phone"
+        android:ems="12"
+        android:inputType="phone"
+        android:textSize="14sp"
+        tools:ignore="TextViewEdits"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/details_ratingbar"
+        android:autoLink="map"
+        android:ems="12"
+        android:freezesText="true"
+        android:inputType="textPostalAddress"
+        android:lineSpacingExtra="10sp"
+        android:lines="2"
+        android:maxLines="5"
+        android:minLines="2"
+        android:scrollbars="none"
+        android:textSize="14sp"
+        tools:ignore="TextViewEdits"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/internationalPhone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/weekdays_text"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/weekdays_text"
+        android:layout_toRightOf="@+id/weekdays_text"
+        android:autoLink="phone"
+        android:ems="12"
+        android:inputType="numberSigned"
+        android:textSize="14sp"
+        tools:ignore="RtlHardcoded,TextFields,TextViewEdits"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/weekdays_text"
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:elevation="1dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textSize="14sp"
+        tools:ignore="SmallSp,TextViewEdits"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/mapsUrl_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/address_text"
+        android:layout_marginTop="14dp"
+        android:autoLink="web"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        tools:ignore="TextFields,TextViewEdits"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/website_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/backCategory_btn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/weekdays_text"
+        android:layout_toRightOf="@+id/weekdays_text"
+        android:autoLink="web"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="RtlHardcoded,TextViewEdits"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Button
+        android:id="@+id/backCategory_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:elevation="0dp"
+        android:text="Back to list"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        />
+
+    <Switch
+        android:id="@+id/openNow_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:checked="true"
+        android:focusable="false"
+        android:shadowColor="@color/colorBtnTxt"
+        android:splitTrack="false"
+        android:text="Open"
+        tools:checked="false"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <RatingBar
+        android:id="@+id/details_ratingbar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/name_text"
+        android:layout_alignRight="@+id/name_text"
+        android:layout_below="@+id/photo_view"
+        android:isIndicator="true"
+        android:max="5"
+        android:numStars="5"
+        android:progressTint="@android:color/holo_red_light"
+        android:progressTintMode="src_atop"
+        android:stepSize="0.01" />
+
+    <TextView
+        android:id="@+id/ratingDetail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/photo_view"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

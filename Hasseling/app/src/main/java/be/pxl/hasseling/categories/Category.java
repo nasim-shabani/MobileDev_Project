@@ -6,7 +6,7 @@ import be.pxl.hasseling.BuildConfig;
  * Created by Danie on 7/11/2017.
  */
 
-public abstract class Category {
+public class Category {
     private String address;
     String formatted_phone_number;
     String international_phone_number;
@@ -142,4 +142,10 @@ public abstract class Category {
         this.website = website;
     }
 
+    @Override
+    public String toString() {
+        return getName() + "\n " +
+                formatOpen() + "\n" +
+                getAddress();
+    }
 }

@@ -19,7 +19,6 @@ public class Supermarket extends Category {
     @Override
     public String toString() {
         return super.getName() + "\n " +
-             //   formatRating() + "\n"  +
                  formatOpen() + "\n" +
                 super.getAddress();
     }

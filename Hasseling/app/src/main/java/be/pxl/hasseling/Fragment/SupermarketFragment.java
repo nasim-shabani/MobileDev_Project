@@ -73,6 +73,7 @@ public class SupermarketFragment extends Fragment {
         supermarketTask.execute("50.931348,5.343312");
 
         // Construct the data source
+
         ArrayList<Supermarket> arrayOfUsers = new ArrayList<Supermarket>();
 // Create the adapter to convert the array to views
         supermarketsAdapter = new GenericArrayAdapter(this.getContext(), arrayOfUsers);
@@ -131,6 +132,15 @@ public class SupermarketFragment extends Fragment {
             final String OWM_PHOTOREFERENCE = "photo_reference";
 
             JSONObject supermarketJson = new JSONObject(supermarketJsonStr);
+
+/*            if (!supermarketJson.has(OWM_RESULTS)) {
+                List<Supermarket> resultStrs = new ArrayList<>();
+
+                resultStrs.add(new Supermarket("BLUBplaceId", "BLUBname", 55L, Boolean.FALSE, "BLUBaddress", "BLUBphotoReference"));
+                resultStrs.add(new Supermarket("BLUBplaceId222", "BLUBname22", 2222L, Boolean.FALSE, "BLUBaddress222", "BLUBphotoReference222"));
+
+                return resultStrs;
+            }*/
             JSONArray supermarketsrArray = supermarketJson.getJSONArray(OWM_RESULTS);
 
             List<Supermarket> resultStrs = new ArrayList<>();
@@ -176,6 +186,7 @@ public class SupermarketFragment extends Fragment {
           /*  for (String s : resultStrs) { //for testing porpuse
                Log.v(LOG_TAG, "Supermarket entry: " + s);
             }*/
+
             return resultStrs;
 
         }

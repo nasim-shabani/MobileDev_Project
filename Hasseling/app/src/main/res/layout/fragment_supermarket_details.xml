@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context="be.pxl.hasseling.Fragment.SupermarketDetailsFragment"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp"
-    tools:showIn="@layout/activity_supermarket_details">
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/name_text"

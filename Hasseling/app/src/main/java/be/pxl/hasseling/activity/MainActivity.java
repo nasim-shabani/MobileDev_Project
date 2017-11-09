@@ -12,15 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-import be.pxl.hasseling.Fragment.ClubFragment;
-import be.pxl.hasseling.Fragment.DrinkFragment;
-import be.pxl.hasseling.Fragment.FitnessFragment;
-import be.pxl.hasseling.Fragment.HomeFragment;
-import be.pxl.hasseling.Fragment.LaundryFragment;
-import be.pxl.hasseling.Fragment.RestaurantFragment;
-import be.pxl.hasseling.Fragment.SupermarketFragment;
-import be.pxl.hasseling.Fragment.SOSFragment;
+import be.pxl.hasseling.Fragment.CategoryFragment;
 import be.pxl.hasseling.Fragment.DirectionFragment;
+import be.pxl.hasseling.Fragment.HomeFragment;
+import be.pxl.hasseling.Fragment.SOSFragment;
 import be.pxl.hasseling.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Fragment getHomeFragment() {
+        Fragment categoryFragment = new CategoryFragment();//DANIE
+        Bundle bundle = new Bundle();//DANIE
+        bundle.clear(); //DANIE
+
         switch (navItemIndex) {
             case 0:
                 // home
@@ -98,32 +97,50 @@ public class MainActivity extends AppCompatActivity {
                 return homeFragment;
             case 1:
                 // supermarket
-                SupermarketFragment supermarketFragment = new SupermarketFragment();
-                return supermarketFragment;
+               /* SupermarketFragment supermarketFragment = new SupermarketFragment();
+                return supermarketFragment;*/
+                bundle.putString("Keyword","convenience_store");//DANIE
+                categoryFragment.setArguments(bundle);//DANIE
+                return categoryFragment;//DANIE
             case 2:
                 // restaurant fragment
-                RestaurantFragment restaurantFragment = new RestaurantFragment();
-                return restaurantFragment;
+               /* RestaurantFragment restaurantFragment = new RestaurantFragment();
+                return restaurantFragment;*/
+                bundle.putString("Keyword","restaurants");//DANIE
+                categoryFragment.setArguments(bundle);//DANIE
+                return categoryFragment;//DANIE
             case 3:
                 // laundry fragment
-                LaundryFragment laundryFragment = new LaundryFragment();
-                return laundryFragment;
+                /*LaundryFragment laundryFragment = new LaundryFragment();
+                return laundryFragment;*/
+                bundle.putString("Keyword","laundry");//DANIE
+                categoryFragment.setArguments(bundle);//DANIE
+                return categoryFragment;//DANIE
             case 4:
                 // drink fragment
-                DrinkFragment drinkFragment = new DrinkFragment();
-                return drinkFragment;
+                /*DrinkFragment drinkFragment = new DrinkFragment();
+                return drinkFragment;*/
+                bundle.putString("Keyword","drink");//DANIE
+                categoryFragment.setArguments(bundle);//DANIE
+                return categoryFragment;//DANIE
             case 5:
                 // transport fragment
                 DirectionFragment directionFragment = new DirectionFragment();
                 return directionFragment;
             case 6:
                 // club fragment
-                ClubFragment clubFragment = new ClubFragment();
-                return clubFragment;
+               /* ClubFragment clubFragment = new ClubFragment();
+                return clubFragment;*/
+                bundle.putString("Keyword","club");//DANIE
+                categoryFragment.setArguments(bundle);//DANIE
+                return categoryFragment;//DANIE
              case 7:
                 // fitness fragment
-                FitnessFragment fitnessFragment = new FitnessFragment();
-                return fitnessFragment;
+                /*FitnessFragment fitnessFragment = new FitnessFragment();
+                return fitnessFragment;*/
+                 bundle.putString("Keyword","fitness");//DANIE
+                 categoryFragment.setArguments(bundle);//DANIE
+                 return categoryFragment;//DANIE
              case 8:
                 // to do fragment
                 SOSFragment SOSFragment = new SOSFragment();

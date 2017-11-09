@@ -64,34 +64,43 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        Bundle bundle = new Bundle();//DANIE
+        bundle.clear();//DANIE
+        Fragment categoryFragment = new CategoryFragment();//DANIE
 
         btn_supermarket= (Button) view.findViewById(R.id.btn_supermarket);
-        Fragment supermarketFragment= new SupermarketFragment();
-        setOnClickButtons(btn_supermarket, supermarketFragment);
+      //  Fragment supermarketFragment= new SupermarketFragment();
+        //    setOnClickButtons(btn_supermarket, supermarketFragment);
+        setOnClickButtons(btn_supermarket, categoryFragment);//DANIE
 
         btn_restaurant= (Button) view.findViewById(R.id.btn_restaurant);
-        Fragment restaurantFragment= new RestaurantFragment();
-        setOnClickButtons(btn_restaurant, restaurantFragment);
+        /*Fragment restaurantFragment= new RestaurantFragment();
+        setOnClickButtons(btn_restaurant, restaurantFragment);*/
+        setOnClickButtons(btn_restaurant, categoryFragment);//DANIE
 
         btn_laundry= (Button) view.findViewById(R.id.btn_laundry);
-        Fragment laundryFragment= new LaundryFragment();
-        setOnClickButtons(btn_laundry, laundryFragment);
+        /*Fragment laundryFragment= new LaundryFragment();
+        setOnClickButtons(btn_laundry, laundryFragment);*/
+        setOnClickButtons(btn_laundry, categoryFragment);//DANIE
 
         btn_drink= (Button) view.findViewById(R.id.btn_drink);
-        Fragment drinkFragment= new DrinkFragment();
-        setOnClickButtons(btn_drink, drinkFragment);
+      /*  Fragment drinkFragment= new DrinkFragment();
+        setOnClickButtons(btn_drink, drinkFragment);*/
+        setOnClickButtons(btn_drink, categoryFragment);//DANIE
+
+        btn_club= (Button) view.findViewById(R.id.btn_club);
+       /* Fragment clubFragment= new ClubFragment();
+        setOnClickButtons(btn_club, clubFragment);*/
+        setOnClickButtons(btn_club, categoryFragment);//DANIE
+
+        btn_fitness= (Button) view.findViewById(R.id.btn_fitness);
+       /* Fragment fitnessFragment= new FitnessFragment();
+        setOnClickButtons(btn_fitness, fitnessFragment);*/
+        setOnClickButtons(btn_fitness, categoryFragment);//DANIE
 
         btn_direction = (Button) view.findViewById(R.id.btn_direction);
         Fragment directionFragment= new DirectionFragment();
         setOnClickButtons(btn_direction, directionFragment);
-
-        btn_club= (Button) view.findViewById(R.id.btn_club);
-        Fragment clubFragment= new ClubFragment();
-        setOnClickButtons(btn_club, clubFragment);
-
-        btn_fitness= (Button) view.findViewById(R.id.btn_fitness);
-        Fragment fitnessFragment= new FitnessFragment();
-        setOnClickButtons(btn_fitness, fitnessFragment);
 
         btn_sos = (Button) view.findViewById(R.id.btn_sos);
         Fragment sosFragment= new SOSFragment();
@@ -107,11 +116,16 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
-    public void setOnClickButtons(Button btn, final Fragment fragment){
+    public void setOnClickButtons(final Button btn, final Fragment fragment){
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String resourceBtnId = getResources().getResourceEntryName(btn.getId());//DANIE
+                Bundle bundle = new Bundle();//DANIE
+                bundle.clear();//DANIE
+                bundle.putString("Keyword",getCategory(resourceBtnId));//DANIE
+                fragment.setArguments(bundle);//DANIE
                 //Fragment fr= new fragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(android.R.anim.fade_in,
@@ -120,6 +134,32 @@ public class HomeFragment extends Fragment{
                 transaction.commitAllowingStateLoss();
             }
         });
+    }
+
+    public String getCategory(String btnId){ //DANIE
+        String keyword ="";
+
+        switch (btnId) {
+            case "btn_supermarket":
+                keyword = "convenience_store";
+                break;
+            case "btn_restaurant":
+                keyword = "restaurants";
+                break;
+            case "btn_laundry":
+                keyword = "laundry";
+                break;
+            case "btn_drink":
+                keyword = "drink";
+                break;
+            case "btn_club":
+                keyword = "club";
+                break;
+            case "btn_fitness":
+                keyword = "fitness";
+                break;
+        }
+        return keyword;
     }
 
     public class fetchData extends AsyncTask<Void, Void, Void>{

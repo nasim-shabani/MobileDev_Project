@@ -97,29 +97,21 @@ public class MainActivity extends AppCompatActivity {
                 return homeFragment;
             case 1:
                 // supermarket
-               /* SupermarketFragment supermarketFragment = new SupermarketFragment();
-                return supermarketFragment;*/
                 bundle.putString("Keyword","convenience_store");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
             case 2:
                 // restaurant fragment
-               /* RestaurantFragment restaurantFragment = new RestaurantFragment();
-                return restaurantFragment;*/
                 bundle.putString("Keyword","restaurant");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
             case 3:
                 // laundry fragment
-                /*LaundryFragment laundryFragment = new LaundryFragment();
-                return laundryFragment;*/
                 bundle.putString("Keyword","laundry");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
             case 4:
                 // drink fragment
-                /*DrinkFragment drinkFragment = new DrinkFragment();
-                return drinkFragment;*/
                 bundle.putString("Keyword","cafe");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
@@ -129,15 +121,11 @@ public class MainActivity extends AppCompatActivity {
                 return directionFragment;
             case 6:
                 // club fragment
-               /* ClubFragment clubFragment = new ClubFragment();
-                return clubFragment;*/
                 bundle.putString("Keyword","club");//DANIE
                 categoryFragment.setArguments(bundle);//DANIE
                 return categoryFragment;//DANIE
              case 7:
                 // fitness fragment
-                /*FitnessFragment fitnessFragment = new FitnessFragment();
-                return fitnessFragment;*/
                  bundle.putString("Keyword","fitness");//DANIE
                  categoryFragment.setArguments(bundle);//DANIE
                  return categoryFragment;//DANIE

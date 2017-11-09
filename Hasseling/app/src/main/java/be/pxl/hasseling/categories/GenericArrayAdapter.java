@@ -64,9 +64,12 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
             // My layout has only one TextView
             // do whatever you want with your string and long
             viewHolder.itemView.setText(item.toString());
-            Picasso.with(this.getContext()).load(item.formatPhotoURL()).resize(250,250).into( viewHolder.imgV_supermarketIcon);
+            if(item.getPhotoReference().equals("default")){
+                Picasso.with(this.getContext()).load(item.getDefaultIcon()).resize(250,250).into( viewHolder.imgV_supermarketIcon);
+            }else{
+                Picasso.with(this.getContext()).load(item.formatPhotoURL()).resize(250,250).into( viewHolder.imgV_supermarketIcon);
 
-         //   Log.v(LOG_TAG, "Item . Get Rating ===== : " + item.getRating());
+            }
 
             if(item.getRating() == null){
                 viewHolder.ratingBar_stars.setVisibility(viewHolder.ratingBar_stars.INVISIBLE);

@@ -1,6 +1,7 @@
 package be.pxl.hasseling.categories;
 
 import be.pxl.hasseling.BuildConfig;
+import be.pxl.hasseling.R;
 
 /**
  * Created by Danie on 7/11/2017.
@@ -17,6 +18,7 @@ public class Category {
     String weekday_text;
     private String photoReference;
     String url, website;
+    String KEYWORD_TAG;
 
     public Category(String placeId,String name, Long rating, Boolean openNow, String address,String photoReference) {
         this.placeId = placeId;
@@ -78,11 +80,54 @@ public class Category {
         this.photoReference = photoReference;
     }
 
+    public String getKEYWORD_TAG() {
+        return KEYWORD_TAG;
+    }
+
+    public void setKEYWORD_TAG(String KEYWORD_TAG) {
+        this.KEYWORD_TAG = KEYWORD_TAG;
+    }
+
     public String formatPhotoURL(){
-        if(photoReference.equals("default")){
-            return "https://png.icons8.com/ingredients/color/50/000000";
-        }
         return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoReference + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY;
+    }
+
+    public int getPhotoDefault() {
+        return R.drawable.header_hasseling;
+      
+        
+    }
+    
+    public int getDefaultIcon(){
+
+        int defaultPhoto = R.mipmap.ic_launcher;
+        switch (KEYWORD_TAG) {
+            case "convenience_store":
+              //  defaultPhoto = "https://png.icons8.com/ingredients/color/50/000000";
+                defaultPhoto= R.mipmap.ic_supermarket;
+                break;
+            case "restaurant":
+            //    defaultPhoto = "https://png.icons8.com/?id=12162&size=2x";
+                defaultPhoto= R.mipmap.ic_restaurant;
+                break;
+            case "laundry":
+              //  defaultPhoto = "https://png.icons8.com/?id=12834&size=560";
+                defaultPhoto= R.mipmap.ic_laundry;
+                break;
+            case "cafe":
+              //  defaultPhoto = "https://png.icons8.com/?id=13300&size=2x";
+                defaultPhoto= R.mipmap.ic_drink;
+                break;
+            case "club":
+               // defaultPhoto = "https://png.icons8.com/?id=16883&size=2x";
+                defaultPhoto= R.mipmap.ic_club;
+                break;
+            case "fitness":
+              //  defaultPhoto = "https://png.icons8.com/?id=12975&size=560";
+                defaultPhoto= R.mipmap.ic_fitness;
+                break;
+        }
+    return defaultPhoto;
     }
 
     String formatRating(){

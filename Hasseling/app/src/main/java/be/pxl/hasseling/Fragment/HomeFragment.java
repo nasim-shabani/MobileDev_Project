@@ -69,33 +69,21 @@ public class HomeFragment extends Fragment{
         Fragment categoryFragment = new CategoryFragment();//DANIE
 
         btn_supermarket= (Button) view.findViewById(R.id.btn_supermarket);
-      //  Fragment supermarketFragment= new SupermarketFragment();
-        //    setOnClickButtons(btn_supermarket, supermarketFragment);
         setOnClickButtons(btn_supermarket, categoryFragment);//DANIE
 
         btn_restaurant= (Button) view.findViewById(R.id.btn_restaurant);
-        /*Fragment restaurantFragment= new RestaurantFragment();
-        setOnClickButtons(btn_restaurant, restaurantFragment);*/
         setOnClickButtons(btn_restaurant, categoryFragment);//DANIE
 
         btn_laundry= (Button) view.findViewById(R.id.btn_laundry);
-        /*Fragment laundryFragment= new LaundryFragment();
-        setOnClickButtons(btn_laundry, laundryFragment);*/
         setOnClickButtons(btn_laundry, categoryFragment);//DANIE
 
         btn_drink= (Button) view.findViewById(R.id.btn_drink);
-      /*  Fragment drinkFragment= new DrinkFragment();
-        setOnClickButtons(btn_drink, drinkFragment);*/
         setOnClickButtons(btn_drink, categoryFragment);//DANIE
 
         btn_club= (Button) view.findViewById(R.id.btn_club);
-       /* Fragment clubFragment= new ClubFragment();
-        setOnClickButtons(btn_club, clubFragment);*/
         setOnClickButtons(btn_club, categoryFragment);//DANIE
 
         btn_fitness= (Button) view.findViewById(R.id.btn_fitness);
-       /* Fragment fitnessFragment= new FitnessFragment();
-        setOnClickButtons(btn_fitness, fitnessFragment);*/
         setOnClickButtons(btn_fitness, categoryFragment);//DANIE
 
         btn_direction = (Button) view.findViewById(R.id.btn_direction);

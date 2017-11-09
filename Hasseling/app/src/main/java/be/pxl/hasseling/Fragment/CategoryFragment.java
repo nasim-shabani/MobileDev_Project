@@ -34,6 +34,8 @@ import be.pxl.hasseling.categories.GenericArrayAdapter;
 
 public class CategoryFragment extends Fragment {
     private GenericArrayAdapter<Category> categoriesAdapter;
+     String KEYWORD_TAG;
+
     public CategoryFragment(){
 
     }
@@ -46,14 +48,14 @@ public class CategoryFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_category, container, false);
 
         Bundle bundle = getArguments();
-        final String keyword = bundle.getString("Keyword");
+       KEYWORD_TAG = bundle.getString("Keyword");
 
         TextView keyword_txt = (TextView) rootview.findViewById(R.id.keyword_txt );
-        keyword_txt.setText(keyword);
+        keyword_txt.setText(KEYWORD_TAG);
 
     //    Toast.makeText(getContext(), "Param0 = "+ keyword,  Toast.LENGTH_SHORT).show();
         CategoryFragment.FetchCategoryTask categoryTask = new CategoryFragment.FetchCategoryTask();
-        categoryTask.execute("50.931348,5.343312",keyword);
+        categoryTask.execute("50.931348,5.343312",KEYWORD_TAG);
 
         // Construct the data source
 
@@ -75,7 +77,7 @@ public class CategoryFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.clear();
                 bundle.putString("categoryPlaceID", String.valueOf(category.getPlaceId()));
-                bundle.putString("Keyword",keyword);
+                bundle.putString("Keyword",KEYWORD_TAG);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -149,7 +151,9 @@ public class CategoryFragment extends Fragment {
                     photoReference = "default";
                 }
 
-                resultStrs.add(new Category(placeID, name, rating, openNow, vicinity, photoReference));
+                Category categoryObj = new Category(placeID, name, rating, openNow, vicinity, photoReference);
+                categoryObj.setKEYWORD_TAG(KEYWORD_TAG);
+                resultStrs.add(categoryObj);
 
             }
           /*  for (Category s : resultStrs) { //for testing porpuse

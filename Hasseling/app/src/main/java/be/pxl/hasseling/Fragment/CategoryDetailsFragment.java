@@ -58,9 +58,8 @@ public class CategoryDetailsFragment extends Fragment {
 
         CategoryDetailsFragment.FetchCategoryDetailTask categoryDetailTask = new CategoryDetailsFragment.FetchCategoryDetailTask();
         categoryDetailTask.execute(id);
+
         Button btn_back= (Button) rootView.findViewById(R.id.backCategory_btn);
-
-
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +174,7 @@ public class CategoryDetailsFragment extends Fragment {
             categoryObj.setUrl(url);
             categoryObj.setWebsite(website);
 
+            categoryObj.setKEYWORD_TAG(KEYWORD_TAG);
             //    Log.v(LOG_TAG, categoryObj.toString());
 
             return categoryObj;
@@ -296,7 +296,8 @@ public class CategoryDetailsFragment extends Fragment {
 
             ImageView photo_reference = (ImageView)rootView.findViewById(R.id.photo_view );
             if(result.getPhotoReference().equals("default")){
-                Picasso.with(getContext()).load("https://png.icons8.com/ingredients/color/50/000000").resize(250,250).into(photo_reference);
+           //     Picasso.with(getContext()).load("https://png.icons8.com/ingredients/color/50/000000").resize(250,250).into(photo_reference);
+                Picasso.with(getContext()).load(result.getPhotoDefault()).into(photo_reference);
             }else{
                 Picasso.with(getContext()).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + result.getPhotoReference() + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY).resize(250,250).into(photo_reference);
             }
@@ -311,9 +312,6 @@ public class CategoryDetailsFragment extends Fragment {
             }else {
                 ratingBar_stars.setVisibility(ratingBar_stars.VISIBLE);
                 ratingView.setVisibility(ratingBar_stars.INVISIBLE);
-
-  /*              Drawable drawable = ratingBar_stars.getProgressDrawable();
-                drawable.setColorFilter(Color.parseColor("#FF7F7F"), PorterDuff.Mode.SRC_ATOP);*/
                 ratingBar_stars.setRating((float) result.getRating());
             }
 

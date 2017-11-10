@@ -69,9 +69,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center"
+                        android:autoLink="phone"
                         android:paddingLeft="14dp"
                         android:text="+32 11 24 88 88"
                         android:textColor="#000000"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:textSize="12dp" />
                 </TableRow>
 
@@ -103,9 +105,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center"
+                        android:autoLink="phone"
                         android:paddingLeft="14dp"
                         android:text="+32 11 33 55 11"
                         android:textColor="#000000"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:textSize="12dp" />
                 </TableRow>
 
@@ -137,9 +141,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center"
+                        android:autoLink="phone"
                         android:paddingLeft="14dp"
                         android:text="+32 11 23 90 11"
                         android:textColor="#000000"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:textSize="12dp" />
                 </TableRow>
 
@@ -171,9 +177,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center"
+                        android:autoLink="phone"
                         android:paddingLeft="14dp"
                         android:text="+32 11 22 29 82"
                         android:textColor="#000000"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:textSize="12dp" />
                 </TableRow>
 

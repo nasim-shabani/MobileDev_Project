@@ -61,8 +61,6 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
 
         if (item!= null) {
             final String LOG_TAG = GenericArrayAdapter.class.getSimpleName();
-            // My layout has only one TextView
-            // do whatever you want with your string and long
             viewHolder.itemView.setText(item.toString());
             if(item.getPhotoReference().equals("default")){
                 Picasso.with(this.getContext()).load(item.getPhotoDefault()).resize(250,250).into( viewHolder.imgV_supermarketIcon);

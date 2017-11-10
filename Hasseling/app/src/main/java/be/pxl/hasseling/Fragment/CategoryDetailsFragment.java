@@ -83,7 +83,7 @@ public class CategoryDetailsFragment extends Fragment {
         private final String LOG_TAG = CategoryDetailsFragment.FetchCategoryDetailTask.class.getSimpleName();
 
         /**
-         * Take the String representing the complete categorys in JSON Format and
+         * Take the String representing the complete category in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
          *
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
@@ -206,11 +206,6 @@ public class CategoryDetailsFragment extends Fragment {
                         .build();
                 URL url = new URL(builtUri.toString());
 
-                //Log.v(LOG_TAG, "Built URI " + builtUri.toString());
-                //Log.v(LOG_TAG, "Forecast string: " + categorysJsonStr);
-                //Debugging purpose
-
-                // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();

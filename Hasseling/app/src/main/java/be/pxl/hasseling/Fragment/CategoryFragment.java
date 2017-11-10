@@ -207,10 +207,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemSele
                 resultStrs.add(categoryObj);
 
             }
-          /*  for (Category s : resultStrs) { //for testing porpuse
-               Log.v(LOG_TAG, "Category entry: " + s.toString());
-            }*/
-
             return resultStrs;
 
         }

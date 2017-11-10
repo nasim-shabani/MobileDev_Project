@@ -101,27 +101,27 @@ public class Category {
         switch (KEYWORD_TAG) {
             case "convenience_store":
               //  defaultPhoto = "https://png.icons8.com/ingredients/color/50/000000";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_supermarket;
                 break;
             case "restaurant":
             //    defaultPhoto = "https://png.icons8.com/?id=12162&size=2x";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_restaurant;
                 break;
             case "laundry":
               //  defaultPhoto = "https://png.icons8.com/?id=12834&size=560";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_laundry;
                 break;
             case "cafe":
               //  defaultPhoto = "https://png.icons8.com/?id=13300&size=2x";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_drink;
                 break;
             case "club":
                // defaultPhoto = "https://png.icons8.com/?id=16883&size=2x";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_club;
                 break;
             case "fitness":
               //  defaultPhoto = "https://png.icons8.com/?id=12975&size=560";
-                defaultPhoto= R.drawable.default_image;
+                defaultPhoto= R.mipmap.ic_fitness;
                 break;
         }
     return defaultPhoto;

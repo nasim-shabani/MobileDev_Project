@@ -65,7 +65,7 @@ public class GenericArrayAdapter<T extends Category> extends ArrayAdapter<T> {
             // do whatever you want with your string and long
             viewHolder.itemView.setText(item.toString());
             if(item.getPhotoReference().equals("default")){
-                Picasso.with(this.getContext()).load(item.getDefaultIcon(item.getKEYWORD_TAG())).resize(250,250).into( viewHolder.imgV_supermarketIcon);
+                Picasso.with(this.getContext()).load(R.drawable.default_image).resize(250,250).into( viewHolder.imgV_supermarketIcon);
             }else{
                 Picasso.with(this.getContext()).load(item.formatPhotoURL()).resize(250,250).into( viewHolder.imgV_supermarketIcon);
 

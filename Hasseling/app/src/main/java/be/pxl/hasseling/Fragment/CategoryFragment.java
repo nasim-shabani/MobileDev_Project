@@ -42,6 +42,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemSele
      String KEYWORD_TAG;
      Spinner locationDropdown;
      ArrayAdapter locationAdapter;
+    TextView tvTitle;
 
     public CategoryFragment(){
 
@@ -55,6 +56,9 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemSele
 
         Bundle bundle = getArguments();
         KEYWORD_TAG = bundle.getString("Keyword");
+
+        tvTitle = (TextView) rootview.findViewById(R.id.catogory_title);
+        tvTitle.setText(KEYWORD_TAG + " nearby . . .");
 
         ImageView keyword_img = (ImageView) rootview.findViewById(R.id.catogory_img);
         Picasso.with(this.getContext()).load(Category.getDefaultIcon(KEYWORD_TAG)).resize(250,250).into(keyword_img);

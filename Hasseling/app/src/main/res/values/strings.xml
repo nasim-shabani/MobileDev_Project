@@ -5,14 +5,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="SupermarketTitle">Some supermarkets close to Dusart.</string>
     <string name="title_activity_transport">Hasseling</string>
 
     <string name="sos_more_info_txt">If you need more details about unique places in Hasselt, click on the link below for more information.</string>
     <string name="sos_more_info_link"><a href="http://www.guido.be/Stadsgids/Hasselt.aspx">http://www.guido.be/Stadsgids/Hasselt.aspx</a></string>
-    <string name="dropdown_location_string">Location Dropdown</string>
+
+    <!-- Strings Category -->
+    <string name="openroute">Open route here</string>
+    <string name="openings_hours">Openings hours</string>
+    <string name="contact">Contact</string>
+    <string name="contentDescImg">Icon Category</string>
+    <string name="back">Back to list</string>
+    <string name="website">Go to their website</string>
+    <string name="route">Open route here</string>
+    <string name="defaultpic">default</string>
+
+
+
+    <!-- Strings dropdown location spinner -->
     <string-array name="location_options">
-        <item name="Kolonel Dusartplein">Kolonel Dusartplein</item>
+        <item>Kolonel Dusartplein</item>
         <item>Station Hasselt</item>
         <item>PXL Elfde Linie</item>
         <item>PXL Vilderstraat</item>
@@ -20,7 +32,7 @@
         <item>Corda Campus</item>
         <item>Provinciehuis Hasselt</item>
         <item>Jessa Hopital</item>
-        <item name="salvator_hopital">Salvator Hopital</item>
+        <item>Salvator Hopital</item>
     </string-array>
 
     <string name="dusart_loc">50.932760,5.342921</string>

@@ -93,7 +93,7 @@ public class Category {
     }
 
     public int getPhotoDefault() {
-        return R.drawable.header_hasseling;
+        return R.drawable.default_image;
     }
     
     public static int getDefaultIcon(String KEYWORD_TAG){

@@ -99,16 +99,23 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        TextView locationDropdownText = (TextView) view;
-        String Latitude_Longitude = (String) locationDropdownText.getText();
         FetchCategoryTask categoryTask = new FetchCategoryTask();
-        categoryTask.execute(getLatitude_Longitude(Latitude_Longitude),KEYWORD_TAG);
+        try{
+            TextView locationDropdownText = (TextView) view;
+            String Latitude_Longitude = (String) locationDropdownText.getText();
+
+            categoryTask.execute(getLatitude_Longitude(Latitude_Longitude),KEYWORD_TAG);
+        }catch (NullPointerException ex){
+            categoryTask.execute(getString(R.string.dusart_loc),KEYWORD_TAG);
+        }
+
+
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         FetchCategoryTask categoryTask = new FetchCategoryTask();
-        categoryTask.execute("50.931348,5.343312",KEYWORD_TAG);
+        categoryTask.execute(getString(R.string.dusart_loc),KEYWORD_TAG);
     }
 
     private String getLatitude_Longitude(String item){
@@ -243,7 +250,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemSele
                         .build();
                 URL url = new URL(builtUri.toString());
 
-               Log.v(LOG_TAG, "Built URI CategoryFragment " + builtUri.toString());
+             //  Log.v(LOG_TAG, "Built URI CategoryFragment " + builtUri.toString());
                 //Debugging purpose
 
                 // Create the request to OpenWeatherMap, and open the connection

@@ -9,17 +9,19 @@ tools:context="be.pxl.hasseling.Fragment.CategoryFragment">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/catogory_img"
-            android:layout_width="140dp"
+            android:layout_width="151dp"
             android:layout_height="50dp"
+            android:contentDescription="@string/contentDescImg"
             android:src="@mipmap/ic_image" />
 
         <Spinner
             android:id="@+id/location_dropdown"
-            android:layout_width="213dp"
+            android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dialog" />
@@ -33,6 +35,6 @@ tools:context="be.pxl.hasseling.Fragment.CategoryFragment">
         android:layout_gravity="bottom"
         android:headerDividersEnabled="true"
         android:scrollbars="horizontal"
-        android:text="Hello World!" />
+        />
 
 </LinearLayout>

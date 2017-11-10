@@ -141,7 +141,7 @@ public class CategoryDetailsFragment extends Fragment {
                 }
             } else {
                 openNow = null;
-                weekday_text = "No Openinghours found. "+ "\n" + "Sorry :(";
+                weekday_text = "No Openings hours found. "+ "\n" + "Sorry :(";
             }
 
             if (categoryJsonResult.has(OWN_PHOTOS)) {
@@ -149,7 +149,7 @@ public class CategoryDetailsFragment extends Fragment {
                 JSONObject categoryPhotosObj = categorysrPhotosArray.getJSONObject(0);
                 photo_reference = categoryPhotosObj.getString(OWM_PHOTOREFERENCE);
             } else {
-                photo_reference = "default";
+                photo_reference = getString(R.string.defaultpic);
             }
 
             if (categoryJsonResult.has(OWM_RATING)) {
@@ -332,7 +332,7 @@ public class CategoryDetailsFragment extends Fragment {
             }else{
                 url.setClickable(true);
                 url.setMovementMethod(LinkMovementMethod.getInstance());
-                String mapsURL = "<a href='" + result.getUrl() + "'>Open route here</a>";
+                String mapsURL = "<a href='" + result.getUrl() + "'>" + getString(R.string.route) + "</a>";
                 url.setText(Html.fromHtml(mapsURL));
             }
 
@@ -344,7 +344,7 @@ public class CategoryDetailsFragment extends Fragment {
             }else{
                 website.setClickable(true);
                 website.setMovementMethod(LinkMovementMethod.getInstance());
-                String websiteURL = "<a href='" + result.getWebsite() + "'>Check their site</a>";
+                String websiteURL = "<a href='" + result.getWebsite() + "'>" + getString(R.string.website)+"</a>";
                 website.setText(Html.fromHtml(websiteURL));
             }
         }

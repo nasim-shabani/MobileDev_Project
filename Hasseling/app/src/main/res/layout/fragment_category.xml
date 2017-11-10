@@ -7,12 +7,24 @@ android:orientation="vertical"
 app:layout_collapseParallaxMultiplier="1.0"
 tools:context="be.pxl.hasseling.Fragment.CategoryFragment">
 
-    <TextView
-        android:id="@+id/keyword_txt"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/catogory_img"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_image" />
+
+        <Spinner
+            android:id="@+id/location_dropdown"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dialog" />
+
+    </TableRow>
 
     <ListView
         android:id="@+id/listview_category"

@@ -54,7 +54,6 @@ public class CategoryDetailsFragment extends Fragment {
          bundle = getArguments();
         String id = bundle.getString("categoryPlaceID");
         KEYWORD_TAG = bundle.getString("Keyword");
-      //  Toast.makeText(getContext(), KEYWORD_TAG,  Toast.LENGTH_SHORT).show();
 
         CategoryDetailsFragment.FetchCategoryDetailTask categoryDetailTask = new CategoryDetailsFragment.FetchCategoryDetailTask();
         categoryDetailTask.execute(id);
@@ -173,9 +172,7 @@ public class CategoryDetailsFragment extends Fragment {
             categoryObj.setRating(rating);
             categoryObj.setUrl(url);
             categoryObj.setWebsite(website);
-
             categoryObj.setKEYWORD_TAG(KEYWORD_TAG);
-            //    Log.v(LOG_TAG, categoryObj.toString());
 
             return categoryObj;
 
@@ -277,8 +274,6 @@ public class CategoryDetailsFragment extends Fragment {
         @Override
         protected void onPostExecute(Category result) {
 
-            //TEST OP WAARDE NULL - EXCEPTION
-            //SOURCE https://stackoverflow.com/questions/9290651/make-a-hyperlink-textview-in-android
             TextView formatted_address  = (TextView) rootView.findViewById(R.id.address_text);
             formatted_address.setText(result.getAddress());
 
@@ -296,7 +291,6 @@ public class CategoryDetailsFragment extends Fragment {
 
             ImageView photo_reference = (ImageView)rootView.findViewById(R.id.photo_view );
             if(result.getPhotoReference().equals("default")){
-           //     Picasso.with(getContext()).load("https://png.icons8.com/ingredients/color/50/000000").resize(250,250).into(photo_reference);
                 Picasso.with(getContext()).load(result.getPhotoDefault()).into(photo_reference);
             }else{
                 Picasso.with(getContext()).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + result.getPhotoReference() + "&key=" + BuildConfig.GOOGLE_PLACES_API_KEY).resize(250,250).into(photo_reference);

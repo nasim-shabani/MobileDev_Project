@@ -11,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,14 +37,15 @@ import be.pxl.hasseling.R;
 import be.pxl.hasseling.categories.Category;
 import be.pxl.hasseling.categories.GenericArrayAdapter;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private GenericArrayAdapter<Category> categoriesAdapter;
      String KEYWORD_TAG;
+     Spinner locationDropdown;
+     ArrayAdapter locationAdapter;
 
     public CategoryFragment(){
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,16 +54,15 @@ public class CategoryFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_category, container, false);
 
         Bundle bundle = getArguments();
-       KEYWORD_TAG = bundle.getString("Keyword");
+        KEYWORD_TAG = bundle.getString("Keyword");
 
-        TextView keyword_txt = (TextView) rootview.findViewById(R.id.keyword_txt );
-        keyword_txt.setText(KEYWORD_TAG);
+        ImageView keyword_img = (ImageView) rootview.findViewById(R.id.catogory_img);
+        Picasso.with(this.getContext()).load(Category.getDefaultIcon(KEYWORD_TAG)).resize(250,250).into(keyword_img);
 
-    //    Toast.makeText(getContext(), "Param0 = "+ keyword,  Toast.LENGTH_SHORT).show();
-        CategoryFragment.FetchCategoryTask categoryTask = new CategoryFragment.FetchCategoryTask();
-        categoryTask.execute("50.931348,5.343312",KEYWORD_TAG);
-
-        // Construct the data source
+        locationAdapter = ArrayAdapter.createFromResource(this.getContext(), R.array.location_options, android.R.layout.simple_spinner_item);
+        locationDropdown = (Spinner) rootview.findViewById(R.id.location_dropdown);
+        locationDropdown.setAdapter(locationAdapter);
+        locationDropdown.setOnItemSelectedListener(CategoryFragment.this);
 
         ArrayList<Category> arrayOfUsers = new ArrayList<Category>();
 // Create the adapter to convert the array to views
@@ -90,6 +95,45 @@ public class CategoryFragment extends Fragment {
         });
 
         return rootview;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        TextView locationDropdownText = (TextView) view;
+        String Latitude_Longitude = (String) locationDropdownText.getText();
+        FetchCategoryTask categoryTask = new FetchCategoryTask();
+        categoryTask.execute(getLatitude_Longitude(Latitude_Longitude),KEYWORD_TAG);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        FetchCategoryTask categoryTask = new FetchCategoryTask();
+        categoryTask.execute("50.931348,5.343312",KEYWORD_TAG);
+    }
+
+    private String getLatitude_Longitude(String item){
+        String location = getString(R.string.dusart_loc);
+        switch (item){
+            case "Kolonel Dusartplein" : location = getString(R.string.dusart_loc);
+            break;
+            case "Station Hasselt" : location = getString(R.string.station_loc);
+                break;
+            case "PXL Elfde Linie" : location = getString(R.string.pxlelf_loc);
+                break;
+            case "PXL Vilderstraat" : location = getString(R.string.pxlvil_loc);
+                break;
+            case "University Hasselt" : location = getString(R.string.uni_loc);
+                break;
+            case "Corda Campus" : location = getString(R.string.corda_loc);
+                break;
+            case "Provinciehuis Hasselt" : location = getString(R.string.prov_loc);
+                break;
+            case "Jessa Hopital" : location = getString(R.string.jessa_loc);
+                break;
+            case "Salvator Hopital" : location = getString(R.string.salvator_loc);
+                break;
+        }
+        return location;
     }
 
     public class FetchCategoryTask extends AsyncTask<String, Void, List<Category>> {
@@ -177,10 +221,8 @@ public class CategoryFragment extends Fragment {
 // Will contain the raw JSON response as a string.
             String categoriesJsonStr = null;
 
-           // String location = "50.931348,5.343312";
-            String radius = "2000";
-         //   String KEYWORD_TAG = "convenience_store";
 
+            String rankby = "distance";
             try {
                 // Construct the URL for the Google places API query
                 // Possible parameters are available at API page, at
@@ -188,19 +230,20 @@ public class CategoryFragment extends Fragment {
                 final String CATEGORY_BASE_URL =
                         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
                 final String LOCATION_PARAM = "location";
-                final String RADIUS_PARAM = "radius";
                 final String KEYWORD_PARAM = "keyword";
                 final String KEY_PARAM = "key";
+                final String RANKBY_PARAM = "rankby";
+
 
                 Uri builtUri = Uri.parse(CATEGORY_BASE_URL).buildUpon()
                         .appendQueryParameter(LOCATION_PARAM, params[0])
-                        .appendQueryParameter(RADIUS_PARAM, radius)
+                        .appendQueryParameter(RANKBY_PARAM,rankby)
                         .appendQueryParameter(KEYWORD_PARAM, params[1])
                         .appendQueryParameter(KEY_PARAM, BuildConfig.GOOGLE_PLACES_API_KEY)
                         .build();
                 URL url = new URL(builtUri.toString());
 
-             //   Log.v(LOG_TAG, "Built URI CategoryFragment " + builtUri.toString());
+               Log.v(LOG_TAG, "Built URI CategoryFragment " + builtUri.toString());
                 //Debugging purpose
 
                 // Create the request to OpenWeatherMap, and open the connection

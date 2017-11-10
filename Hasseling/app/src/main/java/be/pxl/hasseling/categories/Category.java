@@ -94,12 +94,9 @@ public class Category {
 
     public int getPhotoDefault() {
         return R.drawable.header_hasseling;
-      
-        
     }
     
-    public int getDefaultIcon(){
-
+    public static int getDefaultIcon(String KEYWORD_TAG){
         int defaultPhoto = R.mipmap.ic_launcher;
         switch (KEYWORD_TAG) {
             case "convenience_store":
@@ -128,15 +125,6 @@ public class Category {
                 break;
         }
     return defaultPhoto;
-    }
-
-    String formatRating(){
-        if(rating != null){
-           return Math.round(rating) + " stars";
-        }else{
-            return  "No Starrating";
-        }
-
     }
 
     public String formatOpen(){

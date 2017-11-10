@@ -64,27 +64,27 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        Bundle bundle = new Bundle();//DANIE
-        bundle.clear();//DANIE
-        Fragment categoryFragment = new CategoryFragment();//DANIE
+        Bundle bundle = new Bundle();
+        bundle.clear();
+        Fragment categoryFragment = new CategoryFragment();
 
         btn_supermarket= (Button) view.findViewById(R.id.btn_supermarket);
-        setOnClickButtons(btn_supermarket, categoryFragment);//DANIE
+        setOnClickButtons(btn_supermarket, categoryFragment);
 
         btn_restaurant= (Button) view.findViewById(R.id.btn_restaurant);
-        setOnClickButtons(btn_restaurant, categoryFragment);//DANIE
+        setOnClickButtons(btn_restaurant, categoryFragment);
 
         btn_laundry= (Button) view.findViewById(R.id.btn_laundry);
-        setOnClickButtons(btn_laundry, categoryFragment);//DANIE
+        setOnClickButtons(btn_laundry, categoryFragment);
 
         btn_drink= (Button) view.findViewById(R.id.btn_drink);
-        setOnClickButtons(btn_drink, categoryFragment);//DANIE
+        setOnClickButtons(btn_drink, categoryFragment);
 
         btn_club= (Button) view.findViewById(R.id.btn_club);
-        setOnClickButtons(btn_club, categoryFragment);//DANIE
+        setOnClickButtons(btn_club, categoryFragment);
 
         btn_fitness= (Button) view.findViewById(R.id.btn_fitness);
-        setOnClickButtons(btn_fitness, categoryFragment);//DANIE
+        setOnClickButtons(btn_fitness, categoryFragment);
 
         btn_direction = (Button) view.findViewById(R.id.btn_direction);
         Fragment directionFragment= new DirectionFragment();
@@ -109,11 +109,11 @@ public class HomeFragment extends Fragment{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String resourceBtnId = getResources().getResourceEntryName(btn.getId());//DANIE
-                Bundle bundle = new Bundle();//DANIE
-                bundle.clear();//DANIE
-                bundle.putString("Keyword",getCategory(resourceBtnId));//DANIE
-                fragment.setArguments(bundle);//DANIE
+                String resourceBtnId = getResources().getResourceEntryName(btn.getId());
+                Bundle bundle = new Bundle();
+                bundle.clear();
+                bundle.putString("Keyword",getCategory(resourceBtnId));
+                fragment.setArguments(bundle);
                 //Fragment fr= new fragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(android.R.anim.fade_in,
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment{
         });
     }
 
-    public String getCategory(String btnId){ //DANIE
+    public String getCategory(String btnId){
         String keyword ="";
 
         switch (btnId) {

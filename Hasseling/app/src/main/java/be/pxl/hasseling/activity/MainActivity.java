@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Fragment getHomeFragment() {
-        Fragment categoryFragment = new CategoryFragment();//DANIE
-        Bundle bundle = new Bundle();//DANIE
-        bundle.clear(); //DANIE
+        Fragment categoryFragment = new CategoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.clear();
 
         switch (navItemIndex) {
             case 0:
@@ -97,23 +97,23 @@ public class MainActivity extends AppCompatActivity {
                 return homeFragment;
             case 1:
                 // supermarket
-                bundle.putString("Keyword","convenience_store");//DANIE
-                categoryFragment.setArguments(bundle);//DANIE
-                return categoryFragment;//DANIE
+                bundle.putString("Keyword","convenience_store");
+                categoryFragment.setArguments(bundle);
+                return categoryFragment;
             case 2:
                 // restaurant fragment
-                bundle.putString("Keyword","restaurant");//DANIE
-                categoryFragment.setArguments(bundle);//DANIE
-                return categoryFragment;//DANIE
+                bundle.putString("Keyword","restaurant");
+                categoryFragment.setArguments(bundle);
+                return categoryFragment;
             case 3:
                 // laundry fragment
-                bundle.putString("Keyword","laundry");//DANIE
-                categoryFragment.setArguments(bundle);//DANIE
-                return categoryFragment;//DANIE
+                bundle.putString("Keyword","laundry");
+                categoryFragment.setArguments(bundle);
+                return categoryFragment;
             case 4:
                 // drink fragment
-                bundle.putString("Keyword","cafe");//DANIE
-                categoryFragment.setArguments(bundle);//DANIE
+                bundle.putString("Keyword","cafe");
+                categoryFragment.setArguments(bundle);
                 return categoryFragment;//DANIE
             case 5:
                 // transport fragment
@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity {
                 return directionFragment;
             case 6:
                 // club fragment
-                bundle.putString("Keyword","club");//DANIE
-                categoryFragment.setArguments(bundle);//DANIE
-                return categoryFragment;//DANIE
+                bundle.putString("Keyword","club");
+                categoryFragment.setArguments(bundle);
+                return categoryFragment;
              case 7:
                 // fitness fragment
-                 bundle.putString("Keyword","fitness");//DANIE
-                 categoryFragment.setArguments(bundle);//DANIE
-                 return categoryFragment;//DANIE
+                 bundle.putString("Keyword","fitness");
+                 categoryFragment.setArguments(bundle);
+                 return categoryFragment;
              case 8:
                 // to do fragment
                 SOSFragment SOSFragment = new SOSFragment();
@@ -217,13 +217,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
-
-                       /* HomeFragment homeFragment = new HomeFragment();
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .add(R.id.content_frame, homeFragment)
-                                .commit();
-                                */
                         break;
                     case R.id.nav_supermarket:
                         navItemIndex = 1;
@@ -265,12 +258,6 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_SOS;
                         nDrawerLayout.closeDrawers();
                         break;
-                    /*case R.id.nav_restaurant:
-                        navItemIndex = 1;
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, RestaurantActivity.class));
-                        nDrawerLayout.closeDrawers();
-                        break;*/
                     default:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;

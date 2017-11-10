@@ -97,31 +97,31 @@ public class Category {
     }
     
     public static int getDefaultIcon(String KEYWORD_TAG){
-        int defaultPhoto = R.mipmap.ic_launcher;
+        int defaultPhoto = R.drawable.default_image;
         switch (KEYWORD_TAG) {
             case "convenience_store":
               //  defaultPhoto = "https://png.icons8.com/ingredients/color/50/000000";
-                defaultPhoto= R.mipmap.ic_supermarket;
+                defaultPhoto= R.drawable.default_image;
                 break;
             case "restaurant":
             //    defaultPhoto = "https://png.icons8.com/?id=12162&size=2x";
-                defaultPhoto= R.mipmap.ic_restaurant;
+                defaultPhoto= R.drawable.default_image;
                 break;
             case "laundry":
               //  defaultPhoto = "https://png.icons8.com/?id=12834&size=560";
-                defaultPhoto= R.mipmap.ic_laundry;
+                defaultPhoto= R.drawable.default_image;
                 break;
             case "cafe":
               //  defaultPhoto = "https://png.icons8.com/?id=13300&size=2x";
-                defaultPhoto= R.mipmap.ic_drink;
+                defaultPhoto= R.drawable.default_image;
                 break;
             case "club":
                // defaultPhoto = "https://png.icons8.com/?id=16883&size=2x";
-                defaultPhoto= R.mipmap.ic_club;
+                defaultPhoto= R.drawable.default_image;
                 break;
             case "fitness":
               //  defaultPhoto = "https://png.icons8.com/?id=12975&size=560";
-                defaultPhoto= R.mipmap.ic_fitness;
+                defaultPhoto= R.drawable.default_image;
                 break;
         }
     return defaultPhoto;
